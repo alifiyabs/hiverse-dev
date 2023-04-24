@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757869704222",
+    "project_id": "hiverse-develop",
+    "storage_bucket": "hiverse-develop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757869704222:android:cdbb6a300d619d7723aa0f",
+        "android_client_info": {
+          "package_name": "com.jfk.hidev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757869704222-9lujtv1pl1pgqnqi7skre166ci751u8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYLy6QpotucLP50haDljsa6MEszsXdGTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757869704222-9lujtv1pl1pgqnqi7skre166ci751u8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
