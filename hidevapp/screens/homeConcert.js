@@ -7,6 +7,9 @@ import { SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 export default function HomeConcert() {
   const navigation = useNavigation();
   const _goBack = () => console.log('Went back');
+  const pressHandler = () => {
+    navigation.navigate('DetailConcert')
+  }
 
   return (
     <SafeAreaProvider style = {styles.container}>
@@ -18,7 +21,7 @@ export default function HomeConcert() {
         placeholder="Cari Artis, Konser.."
       />
       <ScrollView style={styles.scrollView}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={pressHandler}>
         <Card style = {styles.cardstyle}>
           <Card.Cover style = {styles.cardcover} source={{ uri: 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/01/12/9fa582e9-d297-4777-936b-9182df2b6f62-1673528853294-a46fa53e5875021ab7dc0cf2159ee80b.jpg' }} />
           <Card.Content>
@@ -29,7 +32,7 @@ export default function HomeConcert() {
         </Card>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Card style = {styles.cardstyle} onPress={() => navigation.navigate("DetailConcert")}>
+        <Card style = {styles.cardstyle}>
           <Card.Cover style = {styles.cardcover} source={{ uri: 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/03/14/499f912f-9469-4501-81b3-9436355cef97-1678779309256-3051d357e077bf529a764fd3720cca10.jpg' }} />
           <Card.Content>
             <Text style = {styles.cardtitle}>SHEILA ON 7 LIVE IN CONCERT</Text>
