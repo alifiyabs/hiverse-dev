@@ -6,7 +6,6 @@ import {
 const theme = {
     ...DefaultTheme,
     roundness: 3
-    
 }
 
 
