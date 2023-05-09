@@ -7,7 +7,6 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 const win = Dimensions.get("window");
 export default function HomeConcert() {
   const navigation = useNavigation();
-  const _goBack = () => console.log('Went back');
   const pressHandler = () => {
     navigation.navigate('DetailConcert')
   }
@@ -15,7 +14,6 @@ export default function HomeConcert() {
   return (
     <SafeAreaProvider>
       <Appbar.Header>
-      <Appbar.BackAction onPress={_goBack} />
       <Appbar.Content style = {styles.appbar} title="Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}}/>
       </Appbar.Header>
       <View style={styles.container2}>
@@ -27,7 +25,7 @@ export default function HomeConcert() {
       <View style={styles.container}>
         <TouchableOpacity onPress={pressHandler}>
           <Card style = {styles.cardstyle}>
-            <Card.Cover style = {styles.cardcover} source={{ uri: 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/01/12/9fa582e9-d297-4777-936b-9182df2b6f62-1673528853294-a46fa53e5875021ab7dc0cf2159ee80b.jpg' }} />
+            <Card.Cover style = {styles.cardcover} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/BCF5EFA7-D26C-4A4B-9B2A-9AA5A7741535_1_201_a.jpeg?alt=media&token=31486ce7-c330-43f4-8ee7-afd21e45e3d5' }} />
             <Card.Content>
               <Text style = {styles.cardtitle}>{"\n"}[TREASURE] 2023 TREASURE TOUR HELLO IN JAKARTA</Text>
               <Text style = {styles.cardsubtitle}>Tangerang Selatan, Banten</Text>
@@ -47,7 +45,7 @@ export default function HomeConcert() {
         </TouchableOpacity>
         <TouchableOpacity>
           <Card style = {styles.cardstyle}>
-            <Card.Cover style = {styles.cardcover} source={{ uri: 'https://dyandraglobal.com/wp-content/uploads/2023/01/NCT-Dream-Tour-The-Dream-Show-2_home-page-web-OK.jpg' }} />
+            <Card.Cover style = {styles.cardcover} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/nct-dream-concert.jpeg?alt=media&token=e6a05476-23a1-4953-a38e-f4295946640b' }} />
             <Card.Content>
               <Text style = {styles.cardtitle}>{"\n"}[NCT DREAM] THE DREAM SHOW 2 IN JAKARTA</Text>
               <Text style = {styles.cardsubtitle}>Tangerang Selatan, Banten</Text>

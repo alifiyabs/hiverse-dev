@@ -20,7 +20,7 @@ export default function DetailConcert() {
           <Image
           style = {styles.image} 
           source = 
-          {{uri: 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/01/12/9fa582e9-d297-4777-936b-9182df2b6f62-1673528853294-a46fa53e5875021ab7dc0cf2159ee80b.jpg'
+          {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/BCF5EFA7-D26C-4A4B-9B2A-9AA5A7741535_1_201_a.jpeg?alt=media&token=31486ce7-c330-43f4-8ee7-afd21e45e3d5'
           }}/>
           <Text style = {styles.title}>{"\n"}[TREASURE] 2023 TREASURE TOUR HELLO IN JAKARTA</Text>
           <View style = {styles.container2}>
@@ -33,14 +33,6 @@ export default function DetailConcert() {
               <Text>{'\u2022'} </Text>
               <Text style={styles.body}>Konser akan dilaksanakan pada Indonesia Convention Exhibition (ICE) BSD City (Kab. Tangerang) Hall 5-6 pada 18 Maret 2023.</Text>
             </View>
-            
-            {/* <Text style = {styles.body}>
-              {'\u2022'} Saksikan konser TREASURE berjudul titled 2023 TREASURE TOUR [HELLO] IN JAKARTA.
-            </Text>
-            <Text style = {styles.body}>
-              Konser akan dilaksanakan pada Indonesia Convention Exhibition (ICE) BSD City (Kab. Tangerang) Hall 5-6 pada 18 Maret 2023.
-            </Text> */}
-
           </View>
           <View style = {styles.container2}>
             <Text style = {styles.subtitle}>{"\n"}Informasi Pembelian</Text>
@@ -60,26 +52,12 @@ export default function DetailConcert() {
               <Text>{'\u2022'} </Text>
               <Text style={styles.body}>Anda harus menyelesaikan pembayaran dalam waktu 30 menit sebelum masa berlaku e-ticket habis.</Text>
             </View>
-            
-            {/* <Text style = {styles.body}>
-              - Untuk tiket kategori seated, nomor kursi akan diberikan secara otomatis oleh sistem.
-            </Text>
-            <Text style = {styles.body}>
-              - Seluruh penonton wajib telah melaksanakan vaksinasi lengkap.
-            </Text>
-            <Text style = {styles.body}>
-              - Seluruh penonton harus membawa bukti sertifikat vaksinasi Covid-19.
-            </Text>
-            <Text style = {styles.body}>
-              - Anda harus menyelesaikan pembayaran dalam waktu 30 menit sebelum masa berlaku e-ticket habis.
-            </Text> */}
-
           </View>
           <View style = {styles.container2}>
             <Text style = {styles.subtitle}>{"\n"}Informasi Tiket{"\n"}</Text>
             <Image
               style = {styles.image} 
-              source = {{uri: 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/01/12/16b7cc32-2dfd-4377-9cae-192714370be5-1673528860776-5aa08aa6a6b59b6321d4c3987fee2c8f.jpg'}}
+              source = {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/treasure-seatplan.jpeg?alt=media&token=0e9fea52-df5a-4564-8d54-e830277a36f2'}}
             />
             <Text style={{fontSize: 5}}>{"\n"}</Text>
             <View style = {styles.box}>
@@ -89,16 +67,14 @@ export default function DetailConcert() {
               </Text>
               <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
               <View style = {styles.fixToText}>
-                <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => {}}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>VR Venue</Text>
-                </TouchableOpacity>
+                {/* <TouchableOpacity style={styles.buttonactive}
+                  onPress={() => {navigation.navigate("ConcertVenue")}}>
+                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Venue</Text>
+                </TouchableOpacity> */}
                 <TouchableOpacity style={styles.buttonactive}
                   onPress={() => navigation.navigate("TicketDetails")}>
                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
                 </TouchableOpacity>
-                {/* <Button title='VR Venue' color = '#34B97F' /> */}
-                {/* <Button title='Pilih' color = '#34B97F' onPress={() => navigation.navigate("TicketDetails")}/> */}
               </View>
             </View>
             <Text style={{fontSize: 5}}>{"\n"}</Text>
@@ -109,16 +85,14 @@ export default function DetailConcert() {
               </Text>
               <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
               <View style = {styles.fixToText}>
-                <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => {}}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>VR Venue</Text>
-                </TouchableOpacity>
+                {/* <TouchableOpacity style={styles.buttonactive}
+                  onPress={() => {navigation.navigate("ConcertVenue")}}>
+                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Venue</Text>
+                </TouchableOpacity> */}
                 <TouchableOpacity style={styles.buttonactive}
                   onPress={() => navigation.navigate("TicketDetails")}>
                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
                 </TouchableOpacity>
-                {/* <Button title='VR Venue' color = '#34B97F'/>
-                <Button title='Pilih' color = '#34B97F'/> */}
               </View>
             </View>
           </View>
@@ -128,6 +102,18 @@ export default function DetailConcert() {
               <Text style = {styles.body}>
                 Indonesia Convention Exhibition (ICE) Jalan BSD Grand Boulevard, Pagedangan, Tangerang, Banten
               </Text>
+              <Text style = {{marginTop : 3, marginBottom : 7, fontWeight : 600}}>
+                Untuk melihat venue lebih jelas, silahkan klik gambar di bawah!
+              </Text>
+              <TouchableOpacity
+                onPress={() => {navigation.navigate("ConcertVenue")}}>
+              <Image
+               style = {{
+                height: 200, 
+                borderRadius: 15, 
+                overflow: "hidden",}}
+               source={{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/ice-bsd-concert.jpeg?alt=media&token=84e111bf-edc5-4aab-a6f1-5b50456d6887'}} />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -175,7 +161,7 @@ const styles = StyleSheet.create({
   },
   box: {
     width: win.width-20, 
-    height: 160, 
+    height: 180, 
     borderRadius: 15, 
     backgroundColor: "#D9D9D9", 
     paddingHorizontal: 20,
@@ -203,12 +189,14 @@ const styles = StyleSheet.create({
   },
   body : {
     fontSize : 15,
+    marginBottom : 5
   },
   image : {
     width: win.width-20, 
     height: 200, 
     borderRadius: 15, 
     overflow: "hidden",
+    // resizeMode : "contain"
   },
   fixToText : {
     flexDirection: 'row',
@@ -217,7 +205,7 @@ const styles = StyleSheet.create({
   },
   boxloc : {
     width: win.width-20, 
-    height: 100, 
+    height: 350, 
     borderRadius: 15, 
     backgroundColor: "#D9D9D9", 
     paddingHorizontal: 20,
