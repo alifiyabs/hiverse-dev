@@ -5,12 +5,27 @@ import DetailConcert from './screens/detailConcert';
 import ConcertVenue from './screens/concertVenue';
 import TicketDetails from './screens/ticket-details';
 import FetchData from './firestore/fetchFromDB';
+import { firebase } from '../firestore/configAuth'
 import Login from './screens/login';
 import Registration from './screens/registration';
 
 const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
+    const [user, setUser] = useState();
+
+    function onAuthStateChanged(user) {
+      setUser(user);
+      if (initializing) setInitializing(false);
+    }
+
+    useEffect(() => {
+        const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber;
+      }, []);
+    
+    if (initializing) return null;  
+    
     return (
         <NavigationContainer>
             <Stack.Navigator
