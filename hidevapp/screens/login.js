@@ -49,7 +49,7 @@ export default function Login() {
                 secureTextEntry
             />
             <View style={styles.btnContainer}>
-                <Button onPress={() => navigation.navigate("registration")}>
+                <Button onPress={() => navigation.navigate("Registration")}>
                     <Text>Belum punya akun? </Text>
                     <Text style={styles.daftar}>Daftar</Text>
                 </Button>

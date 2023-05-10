@@ -17,8 +17,8 @@ export default function Navigation() {
                 screenOptions={{headerShown: false}}
                 initialRouteName='Konser'
             >
-                {/* <Stack.Screen name="HomeConcert" component={HomeConcert} />
-                <Stack.Screen name="DetailConcert" component={DetailConcert} />
+                 <Stack.Screen name="HomeConcert" component={HomeConcert} />
+                {/* <Stack.Screen name="DetailConcert" component={DetailConcert} />
                 <Stack.Screen name="TicketDetails" component={TicketDetails} />
                 <Stack.Screen name="ConcertVenue" component={ConcertVenue} /> */}
                 <Stack.Screen name="Login" component={Login} />

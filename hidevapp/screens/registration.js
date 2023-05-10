@@ -32,7 +32,7 @@ export default function Registration() {
     }
     return <SafeAreaProvider>
         <Appbar.Header style={styles.appbar}>
-        <Appbar.BackAction onPress={() =>  navigation.navigate('login')}/>
+        <Appbar.BackAction onPress={() =>  navigation.navigate('Login')}/>
         <Appbar.Content title="Daftar" titleStyle={{fontSize:18, fontWeight: "bold"}}/>
         </Appbar.Header>
         <View style={styles.container}>
