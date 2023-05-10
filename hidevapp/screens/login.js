@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Button, TextInput, Appbar } from "react-native-paper"
-import auth from 'firebase/auth';
+import auth from '@firebase/auth';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 export default function Login() {
