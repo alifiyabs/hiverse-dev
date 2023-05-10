@@ -17,13 +17,14 @@ export default function Navigation() {
                 screenOptions={{headerShown: false}}
                 initialRouteName='Konser'
             >
+
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Registration" component={Registration} />
+                {/* <Stack.Screen name="FetchData" component={FetchData} /> */}
                  <Stack.Screen name="HomeConcert" component={HomeConcert} />
                 {/* <Stack.Screen name="DetailConcert" component={DetailConcert} />
                 <Stack.Screen name="TicketDetails" component={TicketDetails} />
                 <Stack.Screen name="ConcertVenue" component={ConcertVenue} /> */}
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Registration" component={Registration} />
-                <Stack.Screen name="FetchData" component={FetchData} />
 
             </Stack.Navigator>
         </NavigationContainer>
