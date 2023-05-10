@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Text, TextInput, Appbar } from "react-native-paper";
-import auth from 'firebase/compat/auth';
+import { firebase } from '../firestore/configAuth'
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Registration() {
@@ -19,12 +19,9 @@ export default function Registration() {
     }
 
     const handleRegister = async () => {
-        // validasi dulu
-        // 1. apakah email nya bener bisa pakai validitor js
-        // 2. apakah passwor dan repeat passwordnya sama
         try {
 
-            await auth().createUserWithEmailAndPassword(email, password)
+            await firebase.auth().createUserWithEmailAndPassword(email, password)
         } catch (e) {
             console.log("error", e)
         }

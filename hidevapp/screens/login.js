@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Button, TextInput, Appbar } from "react-native-paper"
-import auth from 'firebase/compat/auth';
+import { firebase } from '../firestore/configAuth'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 export default function Login() {
@@ -18,7 +18,7 @@ export default function Login() {
         // 1. apakah email nya bener bisa pakai validitor js
         // 2. apakah passwor dan repeat passwordnya sama
         try {
-            await auth().signInWithEmailAndPassword(email, password)
+            await firebase.auth().signInWithEmailAndPassword(email, password)
         } catch (e) {
             console.log("error", e)
         }
