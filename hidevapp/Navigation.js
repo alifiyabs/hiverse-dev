@@ -1,11 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { firebase } from '../firestore/configAuth'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeConcert from './screens/homeConcert';
 import DetailConcert from './screens/detailConcert';
 import ConcertVenue from './screens/concertVenue';
 import TicketDetails from './screens/ticket-details';
 import FetchData from './firestore/fetchFromDB';
-import { firebase } from '../firestore/configAuth'
 import Login from './screens/login';
 import Registration from './screens/registration';
 
