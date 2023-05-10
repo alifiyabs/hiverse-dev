@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, Text, TextInput, Appbar } from "react-native-paper";
-import auth from '@firebase/auth';
+import auth from 'firebase/compat/auth';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Registration() {
