@@ -32,9 +32,9 @@ export default function Registration() {
         <Appbar.BackAction onPress={() =>  navigation.navigate('Login')}/>
         <Appbar.Content title="Daftar" titleStyle={{fontSize:18, fontWeight: "bold"}}/>
         </Appbar.Header>
+        <Text style={styles.title}>Masukkan Identitas {'\n'}Akun Anda! </Text>
+        <Text style={styles.subtitile}>Silahkan masukan informasi yang akan Anda {'\n'}gunakan untuk masuk ke akun Anda.</Text>
         <View style={styles.container}>
-        <Text style={styles.title}>Masukkan Identitas Akun Anda!</Text>
-        <Text style={styles.subtitile}>Silahkan masukan informasi yang akan Anda gunakan untuk masuk ke akun Anda.</Text>
         <View style={styles.formContainer}>
             <TextInput style={styles.inputEmail}
                 value={email}
@@ -57,17 +57,11 @@ export default function Registration() {
                 placeholder="Ulangi Kata Sandi"
                 secureTextEntry
             />
-            <Checkbox style={styles.checkbox}
-                status={checked ? 'checked' : 'unchecked'}
-                onPress={() => 
-                {setChecked(!checked);
-                }}
-                placeholder="Membuat akun berarti Anda menyetujui Kebijakan Privasi dan Ketentuan Layanan yang berlaku."
-            />
-            <View style={styles.btnContainer}>
-                <Button style={styles.button} mode="contained" onPress={handleRegister}>Daftar</Button>
-            </View>
+            <Text style={styles.consent}>
+            Membuat akun berarti Anda menyetujui <Text style={{color:"#FC4474"}}>Kebijakan Privasi</Text> dan <Text style={{color:"#FC4474"}}>Ketentuan Layanan</Text> yang berlaku.
+            </Text>
         </View>
+        <Button style={styles.button} mode="contained" onPress={handleRegister}>Daftar</Button>
         </View>
     </SafeAreaProvider>
 }
@@ -112,17 +106,32 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     button: {
-        backgroundColor: '#FC4474'
+        backgroundColor: '#FC4474',
+        position: 'absolute',
+        bottom: 40,
+        left: 20,
+        right: 20,
+        elevation: 0
     },
     appbar: {
         backgroundColor: '#FC4474'
     },
     title: {
         fontSize: 32,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: 20,
+        backgroundColor: '#f8f7f2',
+        marginTop: 5
     },
     subtitile: {
         fontSize: 14,
-        color: '#A5A5A5'
+        color: '#A5A5A5',
+        marginLeft: 20,
+        backgroundColor: '#f8f7f2'
+    },
+    consent: {
+        color: '#A5A5A5',
+        marginLeft: 5,
+        marginTop: 40
     }
 })

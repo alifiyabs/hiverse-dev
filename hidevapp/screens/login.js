@@ -14,9 +14,6 @@ export default function Login() {
         setField(text);
     }
     const handleLogin = async () => {
-        // validasi dulu
-        // 1. apakah email nya bener bisa pakai validitor js
-        // 2. apakah passwor dan repeat passwordnya sama
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)
         } catch (e) {
@@ -28,11 +25,11 @@ export default function Login() {
         <Appbar.Header style={styles.appbar}>
         <Appbar.Content title="Masuk atau Daftar" titleStyle={{fontSize:18, fontWeight: "bold"}}/>
         </Appbar.Header>
-        <View style={styles.container}>
         <Text style={styles.title}>Selamat Datang di 
         Hi<Text style={{color:"#34B97F"}}>Verse</Text>!
         </Text>
-        <Text style={styles.subtitile}>Silahkan masuk ke akun anda atau buat akun baru untuk menikmati seluruh fitur kami.</Text>
+        <Text style={styles.subtitile}>Silahkan masuk ke akun anda atau buat akun baru {'\n'}untuk menikmati seluruh fitur kami.</Text>
+        <View style={styles.container}>
         <View style={styles.formContainer}>
             <TextInput style={styles.inputEmail}
                 mode="flat"
@@ -43,18 +40,18 @@ export default function Login() {
             />
             <TextInput style={styles.inputPass}
                 mode="flat"
-                placeholder="Password"
+                placeholder="Kata Sandi"
                 value={password}
                 onChangeText={handleChange(setPassword)}
                 secureTextEntry
             />
-            <View style={styles.btnContainer}>
+        </View>
+        <View style={styles.btnContainer}>
                 <Button onPress={() => navigation.navigate("Registration")}>
-                    <Text>Belum punya akun? </Text>
+                    <Text style={{color:"#000000"}}>Belum punya akun? </Text>
                     <Text style={styles.daftar}>Daftar</Text>
                 </Button>
                 <Button style={styles.button} mode="contained" onPress={handleLogin}>Masuk</Button>
-            </View>
         </View>
     </View>
     </SafeAreaProvider>
@@ -72,7 +69,11 @@ const styles = StyleSheet.create({
         marginTop: 8,
     },
     btnContainer: {
-        marginTop: 20
+        position: 'absolute',
+        bottom: 40,
+        left: 20,
+        right: 20,
+        elevation: 0
     },
     daftar: {
         alignSelf: "center",
@@ -102,10 +103,15 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 32,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: 5,
+        marginLeft: 20,
+        backgroundColor: '#f8f7f2'
     },
     subtitile: {
         fontSize: 14,
-        color: '#A5A5A5'
+        color: '#A5A5A5',
+        marginLeft: 20,
+        backgroundColor: '#f8f7f2'
     }
 })
