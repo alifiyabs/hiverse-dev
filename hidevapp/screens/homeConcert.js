@@ -1,8 +1,11 @@
-import * as React from 'react';
-import { Dimensions, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, TouchableOpacity, View, FlatList } from 'react-native';
 import { Card, Searchbar, Appbar, Text } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { NumericFormat } from "react-number-format";
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { SafeAreaProvider} from 'react-native-safe-area-context';
+import React, {useState, useEffect} from 'react';
+import { collection, onSnapshot, query, where } from "firebase/firestore"; 
+import { db } from "../firestore/config";
 
 const win = Dimensions.get("window");
 export default function HomeConcert() {
@@ -10,6 +13,24 @@ export default function HomeConcert() {
   const pressHandler = () => {
     navigation.navigate('DetailConcert')
   }
+//   const route = useRoute();
+  
+  // Database Firestore Const
+  const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
+  const [list_concert, setConcert] = useState({});
+//   const [artis, setArtis] = useState("Coldplay");
+//   const [namakonser, setNamaKonser] = useState("COLDPLAY Music of The Spheres 2023");
+//   const [kategori, setKategori] = useState("Cat 5");
+
+  // Using firestore to search for corresponding doc
+
+  useEffect(() => {
+    const dataref = query(collection(db, "concerts1")); // Should be using variable
+    onSnapshot(dataref, (snapshot) => {
+      setConcert(snapshot.docs.map((doc) => doc.data()))
+      setWaiting1(false)
+    })
+  }, []);
 
   return (
     <SafeAreaProvider>
@@ -21,40 +42,28 @@ export default function HomeConcert() {
           placeholder="Cari Artis, Konser.."
         />
       </View>
+
+      {!isWaiting1 &&
       <ScrollView>
       <View style={styles.container}>
-        <TouchableOpacity onPress={pressHandler}>
-          <Card style = {styles.cardstyle}>
-            <Card.Cover style = {styles.cardcover} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/BCF5EFA7-D26C-4A4B-9B2A-9AA5A7741535_1_201_a.jpeg?alt=media&token=31486ce7-c330-43f4-8ee7-afd21e45e3d5' }} />
-            <Card.Content>
-              <Text style = {styles.cardtitle}>{"\n"}[TREASURE] 2023 TREASURE TOUR HELLO IN JAKARTA</Text>
-              <Text style = {styles.cardsubtitle}>Tangerang Selatan, Banten</Text>
-              <Text style = {styles.cardprice}>Rp2.215.000</Text>
-            </Card.Content>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Card style = {styles.cardstyle}>
-            <Card.Cover style = {styles.cardcover} source={{ uri: 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/03/14/499f912f-9469-4501-81b3-9436355cef97-1678779309256-3051d357e077bf529a764fd3720cca10.jpg' }} />
-            <Card.Content>
-              <Text style = {styles.cardtitle}>{"\n"}[SHEILA ON 7] LIVE IN CONCERT</Text>
-              <Text style = {styles.cardsubtitle}>Jakarta Pusat, DKI Jakarta</Text>
-              <Text style = {styles.cardprice}>Rp350.000</Text>
-            </Card.Content>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Card style = {styles.cardstyle}>
-            <Card.Cover style = {styles.cardcover} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/nct-dream-concert.jpeg?alt=media&token=e6a05476-23a1-4953-a38e-f4295946640b' }} />
-            <Card.Content>
-              <Text style = {styles.cardtitle}>{"\n"}[NCT DREAM] THE DREAM SHOW 2 IN JAKARTA</Text>
-              <Text style = {styles.cardsubtitle}>Tangerang Selatan, Banten</Text>
-              <Text style = {styles.cardprice}>Rp2.215.000</Text>
-            </Card.Content>
-          </Card>
-        </TouchableOpacity>
+        <FlatList
+            data={list_concert}
+            numColumns={1}
+            renderItem={({item}) => (
+                <><TouchableOpacity onPress={pressHandler}>
+                    <Card style={styles.cardstyle}>
+                        <Card.Cover style={styles.cardcover} source={{ uri: item.cover }} />
+                        <Card.Content>
+                            <Text style={styles.cardtitle}>{"\n"}[{item.artis}] {item.namakonser}</Text>
+                            <Text style={styles.cardsubtitle}>{"\n"}{item.kota}</Text>
+                            <NumericFormat renderText={text => <Text style={styles.cardprice}>{text}</Text>} value={item.harga} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
+                        </Card.Content>
+                    </Card>
+                </TouchableOpacity></>
+            )}
+        />
       </View>
-      </ScrollView>
+      </ScrollView> }
     </SafeAreaProvider>
   )
 }
@@ -90,6 +99,7 @@ const styles = StyleSheet.create({
   cardtitle : {
     fontSize : 15,
     fontWeight : 'bold',
+    color : '#FFFFFF'
   },
   cardsubtitle : {
     fontSize : 13,

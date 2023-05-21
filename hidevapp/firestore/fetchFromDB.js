@@ -1,70 +1,86 @@
-import { collection, updateDoc, getDocs, onSnapshot, doc, query, addDoc, where} from "firebase/firestore";
-import React, {useEffect, useState} from "react"; 
-import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
-import { database } from "../firestore/config";
+import { View, Text, FlatList, StyleSheet, Pressable, TouchableOpacity, Dimensions, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Card, Appbar } from "react-native-paper";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NumericFormat } from "react-number-format";
+import { collection, where, getcollection, getDocs, onSnapshot, doc, query, updateDoc, addDoc } from "firebase/firestore"; 
+import { db } from "../firestore/config";
 
-export default function FetchData () {
+const win = Dimensions.get("window");
 
+const Fetch = () => {
     const [posts_var, setPosts] = useState([]);
 
-    // treasureref = doc(database, "concerts", "l6soiC4bhfFyRIv79R6M");
-
-    // docRef = addDoc(collection(database, "concerts"), {
+    // const docRef = addDoc(collection(db, "concert"), {
     //     date: "10 Juni 2023",
     //     name: "TXT",
     //     price: "2000000",
     // })
 
     // useEffect(() => {
-    //     // updateDoc(treasureref, {
-    //     //     date: "20 Maret 2023",
-    //     //     name: "Treasure",
-    //     //     price: "2215000",
-    //     // })
-
-    //     addDoc(collection(database, "concerts"), {
-    //         date: "10 Juli 2023",
-    //         name: "Itzy",
-    //         price: "1000000",
+    //     updateDoc(treasureref, {
+    //         date: "20 Maret 2023",
+    //         name: "Treasure",
+    //         price: "2215000",
     //     })
+
+    //     // addDoc(collection(db, "concerts"), {
+    //     //     date: "10 Juli 2023",
+    //     //     name: "ENhypen",
+    //     //     price: "1000000",
+    //     // })
         
     // }, []);
         
     useEffect(() => {
-        const q = query(collection(database, "concerts"), where ("name", "==", "Treasure"));
+        const q = query(collection(db, "concerts1"));
         onSnapshot(q, (snapshot) => {
           setPosts(snapshot.docs.map((doc) => doc.data()))
         })
       }, []);
 
     return (
-        <View style={{flex:1, marginTop:100}}>
-            <FlatList 
-                style={{height: "100%"}}
-                data={posts_var}
-                numColumns={1}
-                renderItem={({item}) => (
-                    <Pressable style={styles.container}>
-                        <View style = {styles.innerContainer}>
-                            <Text style={styles.itemHeading}>{item.date}</Text>
-                            <Text style={styles.itemText}>{item.name}</Text>
-                        </View>
-                        
-                    </Pressable>
-                )}
-            />
-        </View>
+        <SafeAreaProvider>
+            <Appbar.Header>
+            <Appbar.Content style = {styles.appbar} title="Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}}/>
+            </Appbar.Header>
+            <ScrollView>
+            <View style={styles.container}>
+                <FlatList 
+                    style={{height: "100%"}}
+                    data={posts_var}
+                    numColumns={1}
+                    renderItem={({item}) => (
+                        <TouchableOpacity>
+                            <Card style = {styles.cardstyle}>
+                                <Card.Cover style = {styles.cardcover} source={{ uri: item.cover }} />
+                                <Card.Content>
+                                    <Text style = {styles.cardtitle}>{"\n"}{item.namakonser}</Text>
+                                    <Text style = {styles.cardsubtitle}>{item.artis}</Text>
+                                    <NumericFormat renderText={text => <Text style={styles.cardprice}>{text}</Text>} value={item.harga} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
+                                </Card.Content>
+                            </Card>
+                        </TouchableOpacity>
+                    )}
+                />
+            </View>
+            </ScrollView>
+        </SafeAreaProvider>
     )
 }
 
+export default Fetch;
+
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#e5e5e5",
-        padding: 15,
-        borderRadius:15,
-        margin:5,
-        marginHorizontal:10,
-    },
+    // container: {
+    //     backgroundColor: "#e5e5e5",
+    //     padding: 15,
+    //     borderRadius:15,
+    //     margin:5,
+    //     marginHorizontal:10,
+    //     flex: 1,
+    //     marginTop: 100,
+    // },
     innerContainer:{
         alignItems: "center",
         flexDirection: "column",
@@ -74,5 +90,33 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontWeight: "300"
-    }
+    },
+    cardstyle: {
+        marginBottom : 10,
+        padding: 2,
+        height: 310,
+        width: win.width-20,
+      },
+    cardtitle : {
+        fontSize : 15,
+        fontWeight : 'bold',
+    },
+    cardsubtitle : {
+        fontSize : 13,
+        color : '#A5A5A5',
+    },
+    cardprice : {
+        color : '#FB648C',
+        fontWeight : 'bold',
+        fontSize: 15,
+    },
+    cardcover : {
+        resizeMode : 'contain',
+    },
+    container: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        padding: 10,
+        alignContent: "center",
+      },
 })

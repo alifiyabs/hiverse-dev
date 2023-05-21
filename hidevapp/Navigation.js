@@ -1,10 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { firebase } from '../firestore/configAuth'
+import React, {useState, useEffect, initializing} from 'react';
+import { firebase } from './firestore/configAuth'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeConcert from './screens/homeConcert';
 import DetailConcert from './screens/detailConcert';
 import ConcertVenue from './screens/concertVenue';
-import TicketDetails from './screens/ticket-details';
+import TicketDetails from './screens/ticketDetails';
 import FetchData from './firestore/fetchFromDB';
 import Login from './screens/login';
 import Registration from './screens/registration';
@@ -39,11 +40,11 @@ export default function Navigation() {
                     </>}
                 {user &&
                     <>
-                        {/* <Stack.Screen name="FetchData" component={FetchData} /> */}
+                        {/* <Stack.Screen name = "FetchData" component={FetchData} /> */}
                         <Stack.Screen name="HomeConcert" component={HomeConcert} />
-                        {/* <Stack.Screen name="DetailConcert" component={DetailConcert} />
-                        <Stack.Screen name="TicketDetails" component={TicketDetails} />
-                        <Stack.Screen name="ConcertVenue" component={ConcertVenue} /> */}
+                        {/*<Stack.Screen name="DetailConcert" component={DetailConcert} /> */}
+                        {/* <Stack.Screen name="TicketDetails" component={TicketDetails} /> */}
+                        {/* <Stack.Screen name="ConcertVenue" component={ConcertVenue} /> */}
                     </>}
 
             </Stack.Navigator>
