@@ -4,12 +4,25 @@ import { Appbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 // import firestore from '@react-native-firebase/firestore';
-// import { database } from "../firestore/config";
-// import FetchData from '../firestore/fetchFromDB';
+// import { db } from "../firestore/config";
 
 const win = Dimensions.get("window");
 export default function DetailConcert() {
   const navigation = useNavigation();
+
+  // Storing passed parameter from previous screen
+  // const [tanggal, setTanggal] = useState(route.params?.tanggal);
+  // const [artis, setArtis] = useState(route.params?.artis);
+  // const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
+  // const [kategori, setKategori] = useState(route.params?.kategori);
+
+  // useEffect(() => {
+  //   const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal, "and", "kategori", "==", kategori)); // Should be using variable
+  //   onSnapshot(r, (snapshot) => {
+  //     setCategory(snapshot.docs.map((doc) => doc.data()))
+  //     setWaiting2(false)
+  //   })
+  // }, []);
   
   return (
     <SafeAreaProvider>
