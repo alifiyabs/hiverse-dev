@@ -17,7 +17,7 @@ export default function HomeConcert() {
   
   // Database Firestore Const
 //   const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
-  const [list_concert, setConcert] = useState({});
+  const [concert, setConcert] = useState({});
 
 
   useEffect(() => {
@@ -31,6 +31,7 @@ export default function HomeConcert() {
     <SafeAreaProvider>
       <Appbar.Header>
       <Appbar.Content style = {styles.appbar} title="Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}}/>
+      {/* <Appbar.Action icon="account-circle" color='#000000' onPress={() => navigation.navigate("Profile")}/> */}
       </Appbar.Header>
       <View style={styles.container2}>
         <Searchbar style = {styles.searchbar}
@@ -38,7 +39,7 @@ export default function HomeConcert() {
         />
       </View>
       <FlatList
-            data={list_concert}
+            data={concert}
             numColumns={1}
             renderItem={({item}) => (
                 <View style={styles.container}>
