@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dimensions, ScrollView, StyleSheet,View, Image, Text, Button, TouchableOpacity } from 'react-native';
 import { Appbar } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 // import firestore from '@react-native-firebase/firestore';
 // import { db } from "../firestore/config";
@@ -9,20 +9,30 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 const win = Dimensions.get("window");
 export default function DetailConcert() {
   const navigation = useNavigation();
+  const route = useRoute();
 
   // Storing passed parameter from previous screen
-  // const [tanggal, setTanggal] = useState(route.params?.tanggal);
-  // const [artis, setArtis] = useState(route.params?.artis);
-  // const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
-  // const [kategori, setKategori] = useState(route.params?.kategori);
+  const [artis, setArtis] = useState(route.params?.artis);
+  const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
+  const [category, setCategory] = useState({});
+  const [tanggal, setTanggal] = useState({})
 
-  // useEffect(() => {
-  //   const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal, "and", "kategori", "==", kategori)); // Should be using variable
-  //   onSnapshot(r, (snapshot) => {
-  //     setCategory(snapshot.docs.map((doc) => doc.data()))
-  //     setWaiting2(false)
-  //   })
-  // }, []);
+  // Using firestore to search for corresponding doc
+  useEffect(() => {
+    const q = query(collection(db, "concerts2"), where("artis", "==", artis)); 
+    onSnapshot(q, (snapshot) => {
+      setConcert(snapshot.docs.map((doc) => doc.data()))
+      setWaiting1(false)
+    })
+  }, []);
+
+  useEffect(() => {
+    const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal, "and", "kategori", "==", category));
+    onSnapshot(r, (snapshot) => {
+      setCategory(snapshot.docs.map((doc) => doc.data()))
+      setWaiting2(false)
+    })
+  }, []);
   
   return (
     <SafeAreaProvider>
@@ -30,109 +40,103 @@ export default function DetailConcert() {
       <Appbar.BackAction onPress={() => navigation.navigate('HomeConcert')}/>
       <Appbar.Content title="Detail Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
       </Appbar.Header>
-      <ScrollView>
-        <View style = {styles.container}>
-          <Image
-          style = {styles.image} 
-          source = 
-          {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/BCF5EFA7-D26C-4A4B-9B2A-9AA5A7741535_1_201_a.jpeg?alt=media&token=31486ce7-c330-43f4-8ee7-afd21e45e3d5'
-          }}/>
-          <Text style = {styles.title}>{"\n"}[TREASURE] 2023 TREASURE TOUR HELLO IN JAKARTA</Text>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Konser</Text>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Saksikan konser TREASURE berjudul 2023 TREASURE TOUR HELLO IN JAKARTA.</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Konser akan dilaksanakan pada Indonesia Convention Exhibition (ICE) BSD City (Kab. Tangerang) Hall 5-6 pada 18 Maret 2023.</Text>
-            </View>
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Pembelian</Text>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Untuk tiket kategori seated, nomor kursi akan diberikan secara otomatis oleh sistem.</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Seluruh penonton wajib telah melaksanakan vaksinasi lengkap.</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Seluruh penonton harus membawa bukti sertifikat vaksinasi Covid-19.</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Anda harus menyelesaikan pembayaran dalam waktu 30 menit sebelum masa berlaku e-ticket habis.</Text>
-            </View>
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Tiket{"\n"}</Text>
-            <Image
-              style = {styles.image} 
-              source = {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/treasure-seatplan.jpeg?alt=media&token=0e9fea52-df5a-4564-8d54-e830277a36f2'}}
-            />
-            <Text style={{fontSize: 5}}>{"\n"}</Text>
-            <View style = {styles.box}>
-              <Text style = {styles.titlebox}>{"\n"}PURPLE A</Text>
-              <Text style = {styles.subtitlebox}>
-                Pengembalian tidak tersedia, konfirmasi instan
-              </Text>
-              <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
-              <View style = {styles.fixToText}>
-                {/* <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => {navigation.navigate("ConcertVenue")}}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Venue</Text>
-                </TouchableOpacity> */}
-                <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => navigation.navigate("TicketDetails")}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <Text style={{fontSize: 5}}>{"\n"}</Text>
-            <View style = {styles.box}>
-              <Text style = {styles.titlebox}>{"\n"}PURPLE B</Text>
-              <Text style = {styles.subtitlebox}>
-                Pengembalian tidak tersedia, konfirmasi instan
-              </Text>
-              <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
-              <View style = {styles.fixToText}>
-                {/* <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => {navigation.navigate("ConcertVenue")}}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Venue</Text>
-                </TouchableOpacity> */}
-                <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => navigation.navigate("TicketDetails")}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Lokasi{"\n"}</Text>
-            <View style = {styles.boxloc}>
-              <Text style = {styles.body}>
-                Indonesia Convention Exhibition (ICE) Jalan BSD Grand Boulevard, Pagedangan, Tangerang, Banten
-              </Text>
-              <Text style = {{marginTop : 3, marginBottom : 7, fontWeight : 600}}>
-                Untuk melihat venue lebih jelas, silahkan klik gambar di bawah!
-              </Text>
-              <TouchableOpacity
-                onPress={() => {navigation.navigate("ConcertVenue")}}>
+      <FlatList
+            data={namakonser}
+            numColumns={1}
+            renderItem={({item}) => (
+              <View style = {styles.container}>
               <Image
-               style = {{
-                height: 200, 
-                borderRadius: 15, 
-                overflow: "hidden",}}
-               source={{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/ice-bsd-concert.jpeg?alt=media&token=84e111bf-edc5-4aab-a6f1-5b50456d6887'}} />
-              </TouchableOpacity>
+              style = {styles.image} 
+              source = {{uri: concerts2[0].cover}}/>
+              <Text style = {styles.title}>[{item.artis}] {item.namakonser} </Text>
+              <View style = {styles.container2}>
+                <Text style = {styles.subtitle}>{"\n"}Informasi Konser</Text>
+                <View style={{flexDirection: 'row', marginRight: 5,}}>
+                  <Text>{'\u2022'} </Text>
+                  <Text style={styles.body}>Saksikan konser {item.artis} berjudul {item.namakonser}</Text>
+                </View>
+                <View style={{flexDirection: 'row', marginRight: 5,}}>
+                  <Text>{'\u2022'} </Text>
+                  <Text style={styles.body}>Konser akan dilaksanakan pada {item.alamat} Hall 5-6 pada {item.tanggal}.</Text>
+                </View>
+              </View>
+              <View style = {styles.container2}>
+                <Text style = {styles.subtitle}>{"\n"}Informasi Pembelian</Text>
+                <View style={{flexDirection: 'row', marginRight: 5,}}>
+                  <Text>{'\u2022'} </Text>
+                  <Text style={styles.body}>Untuk tiket kategori seated, nomor kursi akan diberikan secara otomatis oleh sistem.</Text>
+                </View>
+                <View style={{flexDirection: 'row', marginRight: 5,}}>
+                  <Text>{'\u2022'} </Text>
+                  <Text style={styles.body}>Seluruh penonton wajib telah melaksanakan vaksinasi lengkap.</Text>
+                </View>
+                <View style={{flexDirection: 'row', marginRight: 5,}}>
+                  <Text>{'\u2022'} </Text>
+                  <Text style={styles.body}>Seluruh penonton harus membawa bukti sertifikat vaksinasi Covid-19.</Text>
+                </View>
+                <View style={{flexDirection: 'row', marginRight: 5,}}>
+                  <Text>{'\u2022'} </Text>
+                  <Text style={styles.body}>Anda harus menyelesaikan pembayaran dalam waktu 30 menit sebelum masa berlaku e-ticket habis.</Text>
+                </View>
+              </View>
+              <View style = {styles.container2}>
+                <Text style = {styles.subtitle}>{"\n"}Informasi Tiket{"\n"}</Text>
+                <Image
+                  style = {styles.image} 
+                  source = {{uri: concerts2[0].seatplan}}
+                />
+                <Text style={{fontSize: 5}}>{"\n"}</Text>
+                <View style = {styles.box}>
+                  <Text style = {styles.titlebox}>{item.category}</Text>
+                  <Text style = {styles.subtitlebox}>
+                    Pengembalian tidak tersedia, konfirmasi instan
+                  </Text>
+                  <Text style = {styles.pricebox}>{item.price}</Text>
+                  <View style = {styles.fixToText}>
+                    <TouchableOpacity style={styles.buttonactive}
+                      onPress={() => navigation.navigate("TicketDetails")}>
+                      <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <Text style={{fontSize: 5}}>{"\n"}</Text>
+                <View style = {styles.box}>
+                  <Text style = {styles.titlebox}>{"\n"}PURPLE B</Text>
+                  <Text style = {styles.subtitlebox}>
+                    Pengembalian tidak tersedia, konfirmasi instan
+                  </Text>
+                  <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
+                  <View style = {styles.fixToText}>
+                    <TouchableOpacity style={styles.buttonactive}
+                      onPress={() => navigation.navigate("TicketDetails")}>
+                      <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+              <View style = {styles.container2}>
+                <Text style = {styles.subtitle}>{"\n"}Informasi Lokasi{"\n"}</Text>
+                <View style = {styles.boxloc}>
+                  <Text style = {styles.body}>
+                    Indonesia Convention Exhibition (ICE) Jalan BSD Grand Boulevard, Pagedangan, Tangerang, Banten
+                  </Text>
+                  <Text style = {{marginTop : 3, marginBottom : 7, fontWeight : 600}}>
+                    Untuk melihat venue lebih jelas, silahkan klik gambar di bawah!
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => {navigation.navigate("ConcertVenue")}}>
+                  <Image
+                   style = {{
+                    height: 200, 
+                    borderRadius: 15, 
+                    overflow: "hidden",}}
+                   source={{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/ice-bsd-concert.jpeg?alt=media&token=84e111bf-edc5-4aab-a6f1-5b50456d6887'}} />
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-      </ScrollView>
+          )}
+        />
     </SafeAreaProvider>
   )
 }
