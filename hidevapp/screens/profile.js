@@ -17,6 +17,7 @@ export default function Profile() {
 
     return <SafeAreaProvider>
         <Appbar.Header style={styles.appbar}>
+        {/* <Appbar.BackAction onPress={() =>  navigation.navigate('HomeConcert')}/> */}
         <Appbar.Content title="Profile" titleStyle={{fontSize:18, fontWeight: "bold"}}/>
         </Appbar.Header>
         <View style={styles.container}>
