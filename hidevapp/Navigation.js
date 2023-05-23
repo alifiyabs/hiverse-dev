@@ -9,6 +9,7 @@ import TicketDetails from './screens/ticketDetails';
 import FetchData from './firestore/fetchFromDB';
 import Login from './screens/login';
 import Registration from './screens/registration';
+import Profile from './screens/profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,7 @@ export default function Navigation() {
                         {/*<Stack.Screen name="DetailConcert" component={DetailConcert} /> */}
                         {/* <Stack.Screen name="TicketDetails" component={TicketDetails} /> */}
                         {/* <Stack.Screen name="ConcertVenue" component={ConcertVenue} /> */}
+                        {/* <Stack.Screen name="Profile" component={Profile} /> */}
                     </>}
 
             </Stack.Navigator>

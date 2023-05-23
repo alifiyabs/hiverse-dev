@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, Checkbox, Text, TextInput, Appbar } from "react-native-paper";
+import { Button, Text, Appbar } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { firebase } from '../firestore/configAuth'
 
