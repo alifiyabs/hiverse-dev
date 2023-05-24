@@ -1,27 +1,22 @@
-// import { Dimensions, ScrollView, StyleSheet, TouchableOpacity, View, FlatList} from 'react-native';
+// import { Dimensions, StyleSheet, TouchableOpacity, View, FlatList} from 'react-native';
 // import { Card, Searchbar, Appbar, Text } from 'react-native-paper';
 // import { NumericFormat } from "react-number-format";
-// import { useNavigation, useRoute } from '@react-navigation/native';
+// import { useNavigation} from '@react-navigation/native';
 // import { SafeAreaProvider} from 'react-native-safe-area-context';
 // import React, {useState, useEffect} from 'react';
-// import { collection, onSnapshot, query, where } from "firebase/firestore"; 
+// import { collection, onSnapshot, query, where} from "firebase/firestore"; 
 // import { db } from "../firestore/config";
 
 // const win = Dimensions.get("window");
 // export default function HomeConcert() {
 //   const navigation = useNavigation();
-//   const pressHandler = () => {
-//     navigation.navigate('DetailConcert')
-//   }
-// //   const route = useRoute();
   
-//   // Database Firestore Const
-// //   const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
-//   const [list_concert, setConcert] = useState({});
-
+// // Database Firestore Const
+// //const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
+//   const [concert, setConcert] = useState({});
 
 //   useEffect(() => {
-//     const dataref = query(collection(db, "concerts2")); // Should be using variable
+//     const dataref = query(collection(db, "concerts2"));
 //     onSnapshot(dataref, (snapshot) => {
 //       setConcert(snapshot.docs.map((doc) => doc.data()))
 //     })
@@ -31,19 +26,20 @@
 //     <SafeAreaProvider>
 //       <Appbar.Header>
 //       <Appbar.Content style = {styles.appbar} title="Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}}/>
-//       {/* <Appbar.Action icon="account-circle" color='#000000' onPress={() => navigation.navigate("Profile")}/> */}
+//       <Appbar.Action icon="account-circle" color='#000000' onPress={() => navigation.navigate("Profile")}/>
 //       </Appbar.Header>
 //       <View style={styles.container2}>
 //         <Searchbar style = {styles.searchbar}
 //           placeholder="Cari Artis, Konser.."
 //         />
 //       </View>
+//       {/* {console.log(concert)} */}
 //       <FlatList
-//             data={list_concert}
+//             data={concert}
 //             numColumns={1}
 //             renderItem={({item}) => (
 //                 <View style={styles.container}>
-//                     <><TouchableOpacity onPress={pressHandler}>
+//                     <><TouchableOpacity onPress={() => navigation.navigate('DetailConcert',{concert: concert})}>
 //                         <Card style={styles.cardstyle}>
 //                             <Card.Cover style={styles.cardcover} source={{ uri: item.cover }} />
 //                             <Card.Content style = {styles.cardcontent}>

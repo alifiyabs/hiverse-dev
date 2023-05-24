@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#34b97f'
     },
     appbar: {
-        backgroundColor: '#34B97F'
+        backgroundColor: "#74E1B2"
     },
     title: {
         fontSize: 32,

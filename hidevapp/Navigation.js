@@ -2,10 +2,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, {useState, useEffect, initializing} from 'react';
 import { firebase } from './firestore/configAuth'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeConcert from './screens/homeConcert2';
+import HomeConcert from './screens/homeConcert';
 import DetailConcert from './screens/detailConcert';
 import ConcertVenue from './screens/concertVenue';
 import TicketDetails from './screens/ticketDetails';
+import Payment from './screens/payment';
+import PaymentStatus from './screens/paymentStatus';
 import FetchData from './firestore/fetchFromDB';
 import Login from './screens/login';
 import Registration from './screens/registration';
@@ -41,11 +43,13 @@ export default function Navigation() {
                     </>}
                 {user &&
                     <>
-                        {/* <Stack.Screen name = "FetchData" component={FetchData} /> */}
+                        {/* <Stack.Screen name="OnBoarding" component={Board} /> */}
                         <Stack.Screen name="HomeConcert" component={HomeConcert} />
-                        {/*<Stack.Screen name="DetailConcert" component={DetailConcert} /> */}
-                        {/* <Stack.Screen name="TicketDetails" component={TicketDetails} /> */}
-                        {/* <Stack.Screen name="ConcertVenue" component={ConcertVenue} /> */}
+                        <Stack.Screen name="DetailConcert" component={DetailConcert} />
+                        <Stack.Screen name="TicketDetails" component={TicketDetails} />
+                        <Stack.Screen name="ConcertVenue" component={ConcertVenue} />
+                        {/* <Stack.Screen name="Payment" component={Payment} />
+                        <Stack.Screen name="PaymentStatus" component={PaymentStatus} /> */}
                         {/* <Stack.Screen name="Profile" component={Profile} /> */}
                     </>}
 

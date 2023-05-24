@@ -12,7 +12,7 @@ export default function ConcertVenue() {
   
   return (
     <SafeAreaProvider>
-      <Appbar.Header>
+      <Appbar.Header style={{backgroundColor: "#74E1B2"}}>
       <Appbar.BackAction onPress={() => navigation.navigate('DetailConcert')}/>
       <Appbar.Content title="Venue" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
       </Appbar.Header>
