@@ -49,7 +49,10 @@ export default function HomeConcert() {
                      kota: item.kota,
                      alamat: item.alamat,
                      tempat: item.tempat,
-                     tanggal: item.tanggal})}>
+                     tanggal: item.tanggal,
+                     seatplan: item.seatplan,
+                     venue: item.venue,
+                     venuevr: item.venuevr})}>
                         <Card style={styles.cardstyle}>
                             <Card.Cover style={styles.cardcover} source={{ uri: item.cover }} />
                             <Card.Content style = {styles.cardcontent}>

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Dimensions, ScrollView, StyleSheet,View, Image, Text, TouchableOpacity } from 'react-native';
 import { Appbar } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 // import firestore from '@react-native-firebase/firestore';
 
@@ -9,11 +10,13 @@ const win = Dimensions.get("window");
 
 export default function ConcertVenue() {
   const navigation = useNavigation();
+  const route = useRoute();
+  const [venuevr, setVenuevr] = useState(route.params?.venuevr);
   
   return (
     <SafeAreaProvider>
       <Appbar.Header style={{backgroundColor: "#74E1B2"}}>
-      <Appbar.BackAction onPress={() => navigation.navigate('DetailConcert')}/>
+      <Appbar.BackAction onPress={() => navigation.navigate('DetailConcert', {venuevr: venuevr})}/>
       <Appbar.Content title="Venue" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
       </Appbar.Header>
       <ScrollView>
@@ -22,8 +25,7 @@ export default function ConcertVenue() {
           <Image
           style = {styles.image} 
           source = 
-          {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/66D9E289-6C23-48C1-8BBB-E7218040B2FF_1_201_a.jpeg?alt=media&token=945a57fa-bcd0-4bb7-8b84-a64774112548'
-          }}/>
+          {{uri: venuevr}}/>
         </View>
       </ScrollView>
     </SafeAreaProvider>

@@ -35,10 +35,14 @@ export default function TicketDetails() {
 
   
   // Storing passed parameter from previous screen
-  const tanggal = route.params.tanggal;
-  const artis = route.params.artis;
-  const namakonser = route.params.namakonser;
-  const kategori = route.params.kategori;
+  const [tanggal, setTanggal] = useState(route.params?.tanggal);
+  const [artis, setArtis] = useState(route.params?.artis);
+  const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
+  const [kategori, setKategori] = useState(route.params?.kategori);
+  // const tanggal = route.params.tanggal;
+  // const artis = route.params.artis;
+  // const namakonser = route.params.namakonser;
+  // const kategori = route.params.kategori;
 
   // Using firestore to search for corresponding doc
   useEffect(() => {

@@ -4,7 +4,6 @@ import { Image } from 'react-native'
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Hiverse_Logo } from "../assets";
-import Board from './onBoarding';
 
 export default function SplashScreen() {
     const navigation = useNavigation();

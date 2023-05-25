@@ -52,7 +52,7 @@ export default function Board() {
       NextButtonComponent={Next}
       SkipButtonComponent={Skip}
       titleStyles={styles.title}
-      // onSkip={() => navigation.navigate('Login')}
+      // onSkip={navigation.navigate("Login")}
         pages={[
           {
             backgroundColor: '#ffffff',

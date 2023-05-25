@@ -56,7 +56,12 @@ export default function PaymentStatus() {
 
       {!isWaiting &&
       // <Appbar.Action icon="close" onPress={() => navigation.navigate("HomeConcert")} />}
-      <Appbar.Action icon="close" onPress={() => navigation.navigate("TicketDetails")} />}
+      <Appbar.Action icon="close" onPress={() => navigation.navigate("TicketDetails", 
+                                  {kuota: kuota,
+                                  ticket: ticket,
+                                  artis: artis,
+                                  tanggal: tanggal,
+                                  kategori: kategori})} />}
       </Appbar.Header>
       <View style={{flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#ffffff",}}>
         {isWaiting && 

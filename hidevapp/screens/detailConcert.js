@@ -19,27 +19,35 @@ export default function DetailConcert() {
   const [isWaiting2, setWaiting2] = useState(true); // To wait while database loads
 
   // Storing passed parameter from previous screen
-  // const [tanggal, setTanggal] = useState(route.params?.tanggal);
-  // const [artis, setArtis] = useState(route.params?.artis);
-  // const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
-  // const [kategori, setKategori] = useState(route.params?.kategori);
-  const artis = route.params.artis;
-  // const cover = route.params.cover;
-  const namakonser = route.params.namakonser;
-  const harga = route.params.harga;
-  const kota = route.params.kota;
-  const alamat = route.params.alamat;
-  const tempat = route.params.tempat;
-  const tanggal = route.params.tanggal;
+  const [artis, setArtis] = useState(route.params?.artis);
+  const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
+  const [harga, setHarga] = useState(route.params?.harga);
+  const [kota, setKota] = useState(route.params?.kota);
+  const [alamat, setAlamat] = useState(route.params?.alamat);
+  const [tempat, setTempat] = useState(route.params?.tempat);
+  const [tanggal, setTanggal] = useState(route.params?.tanggal);
+  const [cover, setCover] = useState(route.params?.cover);
+  const [seatplan, setSeatplan] = useState(route.params?.seatplan);
+  const [venue, setVenue] = useState(route.params?.venue);
+  const [venuevr, setVenuevr] = useState(route.params?.venuevr);
+
+  // const artis = route.params?.artis;
+  // const cover = route.params?.cover;
+  // const namakonser = route.params?.namakonser;
+  // const harga = route.params?.harga;
+  // const kota = route.params?.kota;
+  // const alamat = route.params?.alamat;
+  // const tempat = route.params?.tempat;
+  // const tanggal = route.params?.tanggal;
 
   // Using firestore to search for corresponding doc
-  useEffect(() => {
-    const q = query(collection(db, "concerts2"), where("artis", "==", artis)); 
-    onSnapshot(q, (snapshot) => {
-      setConcert(snapshot.docs.map((doc) => doc.data()))
-      setWaiting1(false)
-    })
-  }, []);
+  // useEffect(() => {
+  //   const q = query(collection(db, "concerts2"), where("artis", "==", artis)); 
+  //   onSnapshot(q, (snapshot) => {
+  //     setConcert(snapshot.docs.map((doc) => doc.data()))
+  //     setWaiting1(false)
+  //   })
+  // }, []);
 
   useEffect(() => {
     const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal));
@@ -49,7 +57,7 @@ export default function DetailConcert() {
     })
   }, []);
 
-  console.log(concert)
+  // console.log(concert)
   console.log(category)
   
   return (
@@ -59,18 +67,18 @@ export default function DetailConcert() {
       <Appbar.Content title="Detail Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
       </Appbar.Header>
 
-      {(isWaiting1 || isWaiting2) &&
+      {(isWaiting2) &&
       <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
         <ActivityIndicator size={win.width/5} color={"#FB648C"} />
       </View> }
 
-      {!isWaiting1 && !isWaiting2 &&
+      {!isWaiting2 &&
       <ScrollView>
         <View style = {styles.container}>
           <Image
           style = {styles.image} 
           source = 
-          {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/BCF5EFA7-D26C-4A4B-9B2A-9AA5A7741535_1_201_a.jpeg?alt=media&token=31486ce7-c330-43f4-8ee7-afd21e45e3d5'}}/>
+          {{uri: cover}}/>
           <Text style = {styles.title}>{"\n"}[{artis}] {namakonser}</Text>
           <View style = {styles.container2}>
             <Text style = {styles.subtitle}>{"\n"}Informasi Konser</Text>
@@ -106,11 +114,11 @@ export default function DetailConcert() {
             <Text style = {styles.subtitle}>{"\n"}Informasi Tiket{"\n"}</Text>
             <Image
               style = {styles.image} 
-              source = {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/treasure-seatplan.jpeg?alt=media&token=0e9fea52-df5a-4564-8d54-e830277a36f2'}}
+              source = {{uri: seatplan}}
             />
             <Text style={{fontSize: 5}}>{"\n"}</Text>
             <View style = {styles.box}>
-              <Text style = {styles.titlebox}>{"\n"}{category[0].kategori}</Text>
+              <Text style = {styles.titlebox}>{"\n"}PURPLE A</Text>
               <Text style = {styles.subtitlebox}>
                 Pengembalian tidak tersedia, konfirmasi instan
               </Text>
@@ -146,19 +154,19 @@ export default function DetailConcert() {
             <Text style = {styles.subtitle}>{"\n"}Informasi Lokasi{"\n"}</Text>
             <View style = {styles.boxloc}>
               <Text style = {styles.body}>
-                Indonesia Convention Exhibition (ICE) Jalan BSD Grand Boulevard, Pagedangan, Tangerang, Banten
+                {alamat}
               </Text>
               <Text style = {{marginTop : 3, marginBottom : 7, fontWeight : 600}}>
                 Untuk melihat venue lebih jelas, silahkan klik gambar di bawah!
               </Text>
               <TouchableOpacity
-                onPress={() => {navigation.navigate("ConcertVenue")}}>
+                onPress={() => {navigation.navigate("ConcertVenue", {venuevr: venuevr})}}>
               <Image
                style = {{
                 height: 200, 
                 borderRadius: 15, 
                 overflow: "hidden",}}
-               source={{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/ice-bsd-concert.jpeg?alt=media&token=84e111bf-edc5-4aab-a6f1-5b50456d6887'}} />
+               source={{uri: venue}} />
               </TouchableOpacity>
             </View>
           </View>
