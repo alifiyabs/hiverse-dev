@@ -28,17 +28,17 @@ export default function TicketDetails() {
   const [category, setCategory] = useState({});
 
 //   // Soon to be deleted variables, replaced by passed parameter
-  const [tanggal, setTanggal] = useState("18 Maret 2023");
-  const [artis, setArtis] = useState("TREASURE");
-  const [namakonser, setNamaKonser] = useState("2023 TREASURE TOUR HELLO IN JAKARTA");
-  const [kategori, setKategori] = useState("PURPLE A");
+  // const [tanggal, setTanggal] = useState("18 Maret 2023");
+  // const [artis, setArtis] = useState("TREASURE");
+  // const [namakonser, setNamaKonser] = useState("2023 TREASURE TOUR HELLO IN JAKARTA");
+  // const [kategori, setKategori] = useState("PURPLE A");
 
   
   // Storing passed parameter from previous screen
-//   const tanggal = route.params?.tanggal;
-//   const artis = route.params?.artis;
-//   const namakonser = route.params?.namakonser;
-//   const kategori = route.params?.kategori;
+  const tanggal = route.params.tanggal;
+  const artis = route.params.artis;
+  const namakonser = route.params.namakonser;
+  const kategori = route.params.kategori;
 
   // Using firestore to search for corresponding doc
   useEffect(() => {
@@ -64,7 +64,11 @@ export default function TicketDetails() {
   return (
     <SafeAreaProvider>
       <Appbar.Header style={{backgroundColor: "#74E1B2"}}>
-        <Appbar.BackAction onPress={() => navigation.navigate("DetailConcert")} />
+        <Appbar.BackAction onPress={() => navigation.navigate("DetailConcert", 
+                          {kategori: category[0].kategori,
+                           tanggal : tanggal,
+                           artis: artis,
+                           namakonser : namakonser})} />
         <Appbar.Content title="Detail Tiket" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
       </Appbar.Header>
 

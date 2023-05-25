@@ -4,7 +4,7 @@ import { Appbar, Text, RadioButton } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NumericFormat } from "react-number-format";
-import { LinearGradient } from "expo-linear-gradient";
+// import { LinearGradient } from "expo-linear-gradient";
 
 // Get window size for ease
 const win = Dimensions.get("window");
@@ -24,8 +24,8 @@ export default function Payment() {
   const [kuota, setKuota] = useState(route.params?.kuota);
   const [namaPembeli, setNamaPembeli] = useState(route.params?.namaPembeli);
   const [noPembeli, setNoPembeli] = useState(route.params?.noPembeli);
-  const [nikPembeli, setNIKPembeli] = useState(route.params?.nikPembeli);  // is unused
-  const [alamatPembeli, setAlamatPembeli] = useState(route.params?.alamatPembeli);  // is unused
+  // const [nikPembeli, setNIKPembeli] = useState(route.params?.nikPembeli);  // is unused
+  // const [alamatPembeli, setAlamatPembeli] = useState(route.params?.alamatPembeli);  // is unused
   
   // Variables used by default
   const [value, setValue] = useState("gopay"); // By default Gopay is chosen method

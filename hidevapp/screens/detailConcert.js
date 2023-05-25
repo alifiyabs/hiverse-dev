@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Dimensions, ScrollView, StyleSheet,View, Image, Text, TouchableOpacity } from 'react-native';
-import { Appbar } from 'react-native-paper';
+import { Appbar, ActivityIndicator } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NumericFormat } from "react-number-format";
@@ -15,6 +15,8 @@ export default function DetailConcert() {
   const route = useRoute();
   const [concert, setConcert] = useState({});
   const [category, setCategory] = useState({});
+  const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
+  const [isWaiting2, setWaiting2] = useState(true); // To wait while database loads
 
   // Storing passed parameter from previous screen
   // const [tanggal, setTanggal] = useState(route.params?.tanggal);
@@ -22,7 +24,7 @@ export default function DetailConcert() {
   // const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
   // const [kategori, setKategori] = useState(route.params?.kategori);
   const artis = route.params.artis;
-  const cover = route.params.cover;
+  // const cover = route.params.cover;
   const namakonser = route.params.namakonser;
   const harga = route.params.harga;
   const kota = route.params.kota;
@@ -35,7 +37,7 @@ export default function DetailConcert() {
     const q = query(collection(db, "concerts2"), where("artis", "==", artis)); 
     onSnapshot(q, (snapshot) => {
       setConcert(snapshot.docs.map((doc) => doc.data()))
-      // setWaiting1(false)
+      setWaiting1(false)
     })
   }, []);
 
@@ -43,7 +45,7 @@ export default function DetailConcert() {
     const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal));
     onSnapshot(r, (snapshot) => {
       setCategory(snapshot.docs.map((doc) => doc.data()))
-      // setWaiting2(false)
+      setWaiting2(false)
     })
   }, []);
 
@@ -56,6 +58,13 @@ export default function DetailConcert() {
       <Appbar.BackAction onPress={() => navigation.navigate('HomeConcert')}/>
       <Appbar.Content title="Detail Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
       </Appbar.Header>
+
+      {(isWaiting1 || isWaiting2) &&
+      <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+        <ActivityIndicator size={win.width/5} color={"#FB648C"} />
+      </View> }
+
+      {!isWaiting1 && !isWaiting2 &&
       <ScrollView>
         <View style = {styles.container}>
           <Image
@@ -101,14 +110,19 @@ export default function DetailConcert() {
             />
             <Text style={{fontSize: 5}}>{"\n"}</Text>
             <View style = {styles.box}>
-              <Text style = {styles.titlebox}>{"\n"}PURPLE A</Text>
+              <Text style = {styles.titlebox}>{"\n"}{category[0].kategori}</Text>
               <Text style = {styles.subtitlebox}>
                 Pengembalian tidak tersedia, konfirmasi instan
               </Text>
               <NumericFormat renderText={text => <Text style={styles.pricebox}>{text}</Text>} value={harga} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
               <View style = {styles.fixToText}>
                 <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => navigation.navigate("TicketDetails", {kategori: "PURPLE A"})}>
+                  onPress={() => navigation.navigate("TicketDetails", 
+                  {kategori: category[0].kategori,
+                   tanggal : tanggal,
+                   artis: artis,
+                   namakonser : namakonser,
+                  })}>
                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
                 </TouchableOpacity>
               </View>
@@ -149,7 +163,7 @@ export default function DetailConcert() {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </ScrollView> }
     </SafeAreaProvider>
   )
 }

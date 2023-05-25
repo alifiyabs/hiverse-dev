@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, Text, Appbar } from "react-native-paper";
+import { Button, Text, Appbar, Divider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { firebase } from '../firestore/configAuth'
 
@@ -17,7 +17,7 @@ export default function Profile() {
 
     return <SafeAreaProvider>
         <Appbar.Header style={styles.appbar}>
-        {/* <Appbar.BackAction onPress={() =>  navigation.navigate('HomeConcert')}/> */}
+        <Appbar.BackAction onPress={() =>  navigation.navigate('HomeConcert')}/>
         <Appbar.Content title="Profile" titleStyle={{fontSize:18, fontWeight: "bold"}}/>
         </Appbar.Header>
         <View style={styles.container}>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FC4474'
     },
     appbar: {
-        backgroundColor: '#34B97F'
+        backgroundColor: "#74E1B2"
     },
     btnContainer: {
         position: 'absolute',

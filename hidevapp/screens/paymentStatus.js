@@ -3,9 +3,9 @@ import { Dimensions, StyleSheet, View, Image, ActivityIndicator } from "react-na
 import { Appbar, Text } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
+// import { LinearGradient } from "expo-linear-gradient";
 import { doc, updateDoc } from "firebase/firestore"; 
-import { db } from "../config/config";
+import { db } from "../firestore/config";
 
 // Get window size for ease
 const win = Dimensions.get("window");
@@ -18,7 +18,7 @@ export default function PaymentStatus() {
   // Storing passed parameter from previous screen
   const [kuota, setKuota] = useState(route.params?.kuota);
   const [ticket, setTicket] = useState(route.params?.ticket);
-  const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
+  // const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
   const [artis, setArtis] = useState(route.params?.artis);
   const [tanggal, setTanggal] = useState(route.params?.tanggal);
   const [kategori, setKategori] = useState(route.params?.kategori);

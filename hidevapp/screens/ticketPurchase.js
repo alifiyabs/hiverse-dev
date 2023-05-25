@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, View, TouchableOpacity, ScrollView } from "reac
 import { Appbar, TextInput, Text } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
+// import { LinearGradient } from "expo-linear-gradient";
 
 // Get window size for ease
 const win = Dimensions.get("window");
@@ -32,7 +32,14 @@ export default function TicketPurchase () {
     return (
         <SafeAreaProvider>
             <Appbar.Header style={{backgroundColor: "#74E1B2"}}>
-            <Appbar.BackAction onPress={() => navigation.navigate("TicketDetails")} />
+            <Appbar.BackAction onPress={() => navigation.navigate("TicketDetails", 
+                                                                {total: total, 
+                                                                 ticket: ticket,
+                                                                 artis: artis,
+                                                                 tanggal: tanggal, 
+                                                                 namakonser: namakonser,
+                                                                 kategori: kategori,
+                                                                 kuota: kuota})} />
             <Appbar.Content title="Pembelian Tiket" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
             </Appbar.Header>
 
