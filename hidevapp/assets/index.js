@@ -1,0 +1,1 @@
+export const Hiverse_Logo = require('./hiverseLogo.jpg');

@@ -14,6 +14,7 @@ import PaymentStatus from './screens/paymentStatus';
 import Login from './screens/login';
 import Registration from './screens/registration';
 import Profile from './screens/profile';
+import SplashScreen from './screens/splashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ export default function Navigation() {
                         {/* <Stack.Screen name="OnBoarding" component={Board} /> */}
                 {!user &&
                     <>
+                        <Stack.Screen name="SplashScreen" component={SplashScreen} />
                         <Stack.Screen name="Login" component={Login} />
                         <Stack.Screen name="Registration" component={Registration} />
                     </>}
