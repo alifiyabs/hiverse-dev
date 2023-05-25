@@ -23,7 +23,6 @@ export default function TicketDetails() {
   // Variables used dinamically using firestore
   const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
   const [isWaiting2, setWaiting2] = useState(true); // To wait while database loads
-  // const [price, setPrice] = useState(2215000);  // Not used
   const [concert, setConcert] = useState({});
   const [category, setCategory] = useState({});
 

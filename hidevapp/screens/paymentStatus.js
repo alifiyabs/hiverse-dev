@@ -24,11 +24,11 @@ export default function PaymentStatus() {
   const [kategori, setKategori] = useState(route.params?.kategori);
 
   // Declare fixed variable
-  const docID = artis + "-" + tanggal + "-" + kategori
+  // const docID = artis + "-" + tanggal + "-" + kategori
 
   // Using firestore to update
   useEffect(() => {
-    const updateRef = doc(db, "category", docID)
+    const updateRef = doc(db, "category")
 
     if (kuota-ticket < 1) {
       updateDoc(updateRef, {
@@ -56,10 +56,8 @@ export default function PaymentStatus() {
 
       {!isWaiting &&
       // <Appbar.Action icon="close" onPress={() => navigation.navigate("HomeConcert")} />}
-      <Appbar.Action icon="close" onPress={() => navigation.navigate("TicketDetails", 
-                                  {kuota: kuota,
-                                  ticket: ticket,
-                                  artis: artis,
+      <Appbar.Action icon="close" onPress={() => navigation.navigate("DetailConcert", 
+                                  {artis: artis,
                                   tanggal: tanggal,
                                   kategori: kategori})} />}
       </Appbar.Header>

@@ -91,11 +91,11 @@ export default function Payment() {
         <TouchableOpacity style={styles.button}
         onPress={() => navigation.navigate("PaymentStatus", 
         {kuota: kuota, 
-        ticket: ticket,
-        namakonser: namakonser,
-        artis: artis,
-        tanggal: tanggal,
-        kategori: kategori})}>
+         ticket: ticket,
+         namakonser: namakonser,
+         artis: artis,
+         tanggal: tanggal,
+         kategori: kategori})}>
         <Text style={{color: "#ffffff", fontWeight: "bold"}}>BAYAR</Text>
         </TouchableOpacity>
       </View>
