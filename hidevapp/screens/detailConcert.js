@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, ScrollView, StyleSheet,View, Image, Text, TouchableOpacity } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet,View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
 import { Appbar, ActivityIndicator } from 'react-native-paper';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -127,9 +127,9 @@ export default function DetailConcert() {
                 <TouchableOpacity style={styles.buttonactive}
                   onPress={() => navigation.navigate("TicketDetails", 
                   {kategori: category[0].kategori,
-                   tanggal : tanggal,
-                   artis: artis,
-                   namakonser : namakonser,
+                  tanggal : tanggal,
+                  artis: artis,
+                  namakonser : namakonser,
                   })}>
                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
                 </TouchableOpacity>
@@ -162,14 +162,14 @@ export default function DetailConcert() {
               <TouchableOpacity
                 onPress={() => {navigation.navigate("ConcertVenue", {venuevr: venuevr})}}>
               <Image
-               style = {{
+              style = {{
                 height: 200, 
                 borderRadius: 15, 
                 overflow: "hidden",}}
-               source={{uri: venue}} />
+              source={{uri: venue}} />
               </TouchableOpacity>
             </View>
-          </View>
+          </View> 
         </View>
       </ScrollView> }
     </SafeAreaProvider>
