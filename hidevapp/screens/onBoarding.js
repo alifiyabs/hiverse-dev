@@ -2,30 +2,49 @@ import React from "react";
 import { Dimensions, StyleSheet, Button, Image, Text, TouchableOpacity } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import HomeConcert from "./homeConcert";
+import Login from "./login";
 
 const win = Dimensions.get("window");
 
-const Done = () => (
-  <TouchableOpacity>
-    <Text style={{padding: 15, fontSize: 15}}>Tutup</Text>
-  </TouchableOpacity>
-);
 
-const Next = () => (
-  <TouchableOpacity>
-    <Text style={{padding: 15, fontSize: 15}}>Lanjut</Text>
-  </TouchableOpacity>
-);
+// const Done = (navigation) => (
+//   <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+//     <Text style={{padding: 15, fontSize: 15}}>Tutup</Text>
+//   </TouchableOpacity>
+// );
 
-const Skip = () => (
-  <TouchableOpacity>
-    <Text style={{padding: 15, fontSize: 15}}>Lewati</Text>
-  </TouchableOpacity>
-);
+// const Next = (navigation) => (
+//   <TouchableOpacity>
+//     <Text style={{padding: 15, fontSize: 15}}>Lanjut</Text>
+//   </TouchableOpacity>
+// );
+
+// const Skip = (navigation) => (
+//   <TouchableOpacity>
+//     <Text style={{padding: 15, fontSize: 15}}>Lewati</Text>
+//   </TouchableOpacity>
+// );
 
 export default function Board() {
   const navigation = useNavigation();
+
+  const Done = () => (
+    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+      <Text style={{padding: 15, fontSize: 15}}>Tutup</Text>
+    </TouchableOpacity>
+  );
+  
+  const Next = () => (
+    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+      <Text style={{padding: 15, fontSize: 15}}>Lanjut</Text>
+    </TouchableOpacity>
+  );
+  
+  const Skip = () => (
+    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+      <Text style={{padding: 15, fontSize: 15}}>Lewati</Text>
+    </TouchableOpacity>
+  );
 
   return (
       <Onboarding
@@ -33,7 +52,7 @@ export default function Board() {
       NextButtonComponent={Next}
       SkipButtonComponent={Skip}
       titleStyles={styles.title}
-      onSkip={navigation.navigate(HomeConcert)}
+      // onSkip={() => navigation.navigate('Login')}
         pages={[
           {
             backgroundColor: '#ffffff',

@@ -7,7 +7,7 @@ import DetailConcert from './screens/detailConcert';
 import ConcertVenue from './screens/concertVenue';
 import TicketDetails from './screens/ticketDetails';
 import TicketPurchase from './screens/ticketPurchase';
-// import Board from './screens/onBoarding';
+import Board from './screens/onBoarding';
 import Payment from './screens/payment';
 import PaymentStatus from './screens/paymentStatus';
 // import FetchData from './firestore/fetchFromDB';
@@ -39,16 +39,15 @@ export default function Navigation() {
                 screenOptions={{headerShown: false}}
                 initialRouteName='Konser'
             >
-                        {/* <Stack.Screen name="OnBoarding" component={Board} /> */}
                 {!user &&
                     <>
                         <Stack.Screen name="SplashScreen" component={SplashScreen} />
+                        <Stack.Screen name="OnBoarding" component={Board} />
                         <Stack.Screen name="Login" component={Login} />
                         <Stack.Screen name="Registration" component={Registration} />
                     </>}
                 {user &&
                     <>
-                        {/* <Stack.Screen name="OnBoarding" component={Board} /> */}
                         <Stack.Screen name="HomeConcert" component={HomeConcert} />
                         <Stack.Screen name="DetailConcert" component={DetailConcert} />
                         <Stack.Screen name="TicketDetails" component={TicketDetails} />
