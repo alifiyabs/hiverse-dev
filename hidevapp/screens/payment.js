@@ -90,7 +90,8 @@ export default function Payment() {
       <View style={styles.container2}>
         <TouchableOpacity style={styles.button}
         onPress={() => navigation.navigate("PaymentStatus", 
-        {kuota: kuota, ticket: ticket,
+        {kuota: kuota, 
+        ticket: ticket,
         namakonser: namakonser,
         artis: artis,
         tanggal: tanggal,

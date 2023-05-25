@@ -15,7 +15,7 @@ export default function DetailConcert() {
   const route = useRoute();
   const [concert, setConcert] = useState({});
   const [category, setCategory] = useState({});
-  const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
+  // const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
   const [isWaiting2, setWaiting2] = useState(true); // To wait while database loads
 
   // Storing passed parameter from previous screen
@@ -31,16 +31,9 @@ export default function DetailConcert() {
   const [venue, setVenue] = useState(route.params?.venue);
   const [venuevr, setVenuevr] = useState(route.params?.venuevr);
 
-  // const artis = route.params?.artis;
-  // const cover = route.params?.cover;
-  // const namakonser = route.params?.namakonser;
-  // const harga = route.params?.harga;
-  // const kota = route.params?.kota;
-  // const alamat = route.params?.alamat;
-  // const tempat = route.params?.tempat;
-  // const tanggal = route.params?.tanggal;
-
   // Using firestore to search for corresponding doc
+
+  // From Database Concerts 2
   // useEffect(() => {
   //   const q = query(collection(db, "concerts2"), where("artis", "==", artis)); 
   //   onSnapshot(q, (snapshot) => {
@@ -48,6 +41,8 @@ export default function DetailConcert() {
   //     setWaiting1(false)
   //   })
   // }, []);
+
+  // From Database Category 
 
   useEffect(() => {
     const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal));
@@ -73,105 +68,110 @@ export default function DetailConcert() {
       </View> }
 
       {!isWaiting2 &&
-      <ScrollView>
-        <View style = {styles.container}>
-          <Image
-          style = {styles.image} 
-          source = 
-          {{uri: cover}}/>
-          <Text style = {styles.title}>{"\n"}[{artis}] {namakonser}</Text>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Konser</Text>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Saksikan konser {artis} berjudul {namakonser}</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Konser akan dilaksanakan pada {alamat} ({kota}) {tempat} pada {tanggal}.</Text>
-            </View>
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Pembelian</Text>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Untuk tiket kategori seated, nomor kursi akan diberikan secara otomatis oleh sistem.</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Seluruh penonton wajib telah melaksanakan vaksinasi lengkap.</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Seluruh penonton harus membawa bukti sertifikat vaksinasi Covid-19.</Text>
-            </View>
-            <View style={{flexDirection: 'row', marginRight: 5,}}>
-              <Text>{'\u2022'} </Text>
-              <Text style={styles.body}>Anda harus menyelesaikan pembayaran dalam waktu 30 menit sebelum masa berlaku e-ticket habis.</Text>
-            </View>
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Tiket{"\n"}</Text>
+      <FlatList
+        data={category}
+        numColumns={1}
+        renderItem={({item}) => (
+          <View style = {styles.container}>
             <Image
-              style = {styles.image} 
-              source = {{uri: seatplan}}
-            />
-            <Text style={{fontSize: 5}}>{"\n"}</Text>
-            <View style = {styles.box}>
-              <Text style = {styles.titlebox}>{"\n"}PURPLE A</Text>
-              <Text style = {styles.subtitlebox}>
-                Pengembalian tidak tersedia, konfirmasi instan
-              </Text>
-              <NumericFormat renderText={text => <Text style={styles.pricebox}>{text}</Text>} value={harga} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
-              <View style = {styles.fixToText}>
-                <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => navigation.navigate("TicketDetails", 
-                  {kategori: category[0].kategori,
-                  tanggal : tanggal,
-                  artis: artis,
-                  namakonser : namakonser,
-                  })}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
-                </TouchableOpacity>
+            style = {styles.image} 
+            source = 
+            {{uri: cover}}/>
+            <Text style = {styles.title}>{"\n"}[{artis}] {namakonser}</Text>
+            <View style = {styles.container2}>
+              <Text style = {styles.subtitle}>{"\n"}Informasi Konser</Text>
+              <View style={{flexDirection: 'row', marginRight: 5,}}>
+                <Text>{'\u2022'} </Text>
+                <Text style={styles.body}>Saksikan konser {artis} berjudul {namakonser}</Text>
+              </View>
+              <View style={{flexDirection: 'row', marginRight: 5,}}>
+                <Text>{'\u2022'} </Text>
+                <Text style={styles.body}>Konser akan dilaksanakan pada {alamat} ({kota}) {tempat} pada {tanggal}.</Text>
               </View>
             </View>
-            <Text style={{fontSize: 5}}>{"\n"}</Text>
-            {/* <View style = {styles.box}>
-              <Text style = {styles.titlebox}>{"\n"}PURPLE B</Text>
-              <Text style = {styles.subtitlebox}>
-                Pengembalian tidak tersedia, konfirmasi instan
-              </Text>
-              <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
-              <View style = {styles.fixToText}>
-                <TouchableOpacity style={styles.buttonactive}
-                  onPress={() => navigation.navigate("TicketDetails")}>
-                  <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
-                </TouchableOpacity>
+            <View style = {styles.container2}>
+              <Text style = {styles.subtitle}>{"\n"}Informasi Pembelian</Text>
+              <View style={{flexDirection: 'row', marginRight: 5,}}>
+                <Text>{'\u2022'} </Text>
+                <Text style={styles.body}>Untuk tiket kategori seated, nomor kursi akan diberikan secara otomatis oleh sistem.</Text>
               </View>
-            </View> */}
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.subtitle}>{"\n"}Informasi Lokasi{"\n"}</Text>
-            <View style = {styles.boxloc}>
-              <Text style = {styles.body}>
-                {alamat}
-              </Text>
-              <Text style = {{marginTop : 3, marginBottom : 7, fontWeight : 600}}>
-                Untuk melihat venue lebih jelas, silahkan klik gambar di bawah!
-              </Text>
-              <TouchableOpacity
-                onPress={() => {navigation.navigate("ConcertVenue", {venuevr: venuevr})}}>
+              <View style={{flexDirection: 'row', marginRight: 5,}}>
+                <Text>{'\u2022'} </Text>
+                <Text style={styles.body}>Seluruh penonton wajib telah melaksanakan vaksinasi lengkap.</Text>
+              </View>
+              <View style={{flexDirection: 'row', marginRight: 5,}}>
+                <Text>{'\u2022'} </Text>
+                <Text style={styles.body}>Seluruh penonton harus membawa bukti sertifikat vaksinasi Covid-19.</Text>
+              </View>
+              <View style={{flexDirection: 'row', marginRight: 5,}}>
+                <Text>{'\u2022'} </Text>
+                <Text style={styles.body}>Anda harus menyelesaikan pembayaran dalam waktu 30 menit sebelum masa berlaku e-ticket habis.</Text>
+              </View>
+            </View>
+            <View style = {styles.container2}>
+              <Text style = {styles.subtitle}>{"\n"}Informasi Tiket{"\n"}</Text>
               <Image
-              style = {{
-                height: 200, 
-                borderRadius: 15, 
-                overflow: "hidden",}}
-              source={{uri: venue}} />
-              </TouchableOpacity>
+                style = {styles.image} 
+                source = {{uri: seatplan}}
+              />
+              <Text style={{fontSize: 5}}>{"\n"}</Text>
+              <View style = {styles.box}>
+                <Text style = {styles.titlebox}>{"\n"}{item.kategori}</Text>
+                <Text style = {styles.subtitlebox}>
+                  Pengembalian tidak tersedia, konfirmasi instan
+                </Text>
+                <NumericFormat renderText={text => <Text style={styles.pricebox}>{text}</Text>} value={harga} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
+                <View style = {styles.fixToText}>
+                  <TouchableOpacity style={styles.buttonactive}
+                    onPress={() => navigation.navigate("TicketDetails", 
+                    {kategori: item.kategori,
+                    tanggal : tanggal,
+                    artis: artis,
+                    namakonser : namakonser,
+                    price : item.harga,
+                    })}>
+                    <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <Text style={{fontSize: 5}}>{"\n"}</Text>
+              {/* <View style = {styles.box}>
+                <Text style = {styles.titlebox}>{"\n"}PURPLE B</Text>
+                <Text style = {styles.subtitlebox}>
+                  Pengembalian tidak tersedia, konfirmasi instan
+                </Text>
+                <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
+                <View style = {styles.fixToText}>
+                  <TouchableOpacity style={styles.buttonactive}
+                    onPress={() => navigation.navigate("TicketDetails")}>
+                    <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
+                  </TouchableOpacity>
+                </View>
+              </View> */}
             </View>
-          </View> 
-        </View>
-      </ScrollView> }
+            <View style = {styles.container2}>
+              <Text style = {styles.subtitle}>{"\n"}Informasi Lokasi{"\n"}</Text>
+              <View style = {styles.boxloc}>
+                <Text style = {styles.body}>
+                  {alamat}
+                </Text>
+                <Text style = {{marginTop : 3, marginBottom : 7, fontWeight : 600}}>
+                  Untuk melihat venue lebih jelas, silahkan klik gambar di bawah!
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {navigation.navigate("ConcertVenue", {venuevr: venuevr})}}>
+                <Image
+                style = {{
+                  height: 200, 
+                  borderRadius: 15, 
+                  overflow: "hidden",}}
+                source={{uri: venue}} />
+                </TouchableOpacity>
+              </View>
+            </View> 
+          </View>
+        )}
+      />}
     </SafeAreaProvider>
   )
 }

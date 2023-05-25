@@ -1,63 +1,94 @@
 // import * as React from 'react';
-// import { Dimensions, ScrollView, StyleSheet,View, Image, Text, Button, TouchableOpacity } from 'react-native';
-// import { Appbar } from 'react-native-paper';
+// import { Dimensions, ScrollView, StyleSheet,View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+// import { Appbar, ActivityIndicator } from 'react-native-paper';
 // import { useNavigation, useRoute } from '@react-navigation/native';
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { NumericFormat } from "react-number-format";
+// import { useEffect, useState } from 'react';
+// import { collection, onSnapshot, query, where} from "firebase/firestore"; 
 // // import firestore from '@react-native-firebase/firestore';
-// // import { db } from "../firestore/config";
+// import { db } from "../firestore/config";
 
 // const win = Dimensions.get("window");
 // export default function DetailConcert() {
 //   const navigation = useNavigation();
 //   const route = useRoute();
-
+//   const [concert, setConcert] = useState({});
+//   const [category, setCategory] = useState({});
+//   const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
+//   const [isWaiting2, setWaiting2] = useState(true); // To wait while database loads
 
 //   // Storing passed parameter from previous screen
-//   // const [tanggal, setTanggal] = useState(route.params?.tanggal);
-//   // const [artis, setArtis] = useState(route.params?.artis);
-//   // const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
-//   // const [kategori, setKategori] = useState(route.params?.kategori);
+//   const [artis, setArtis] = useState(route.params?.artis);
+//   const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
+//   const [harga, setHarga] = useState(route.params?.harga);
+//   const [kota, setKota] = useState(route.params?.kota);
+//   const [alamat, setAlamat] = useState(route.params?.alamat);
+//   const [tempat, setTempat] = useState(route.params?.tempat);
+//   const [tanggal, setTanggal] = useState(route.params?.tanggal);
+//   const [cover, setCover] = useState(route.params?.cover);
+//   const [seatplan, setSeatplan] = useState(route.params?.seatplan);
+//   const [venue, setVenue] = useState(route.params?.venue);
+//   const [venuevr, setVenuevr] = useState(route.params?.venuevr);
+
+//   // const artis = route.params?.artis;
+//   // const cover = route.params?.cover;
+//   // const namakonser = route.params?.namakonser;
+//   // const harga = route.params?.harga;
+//   // const kota = route.params?.kota;
+//   // const alamat = route.params?.alamat;
+//   // const tempat = route.params?.tempat;
+//   // const tanggal = route.params?.tanggal;
 
 //   // Using firestore to search for corresponding doc
-//   useEffect(() => {
-//     const q = query(collection(db, "concerts"), where("artis", "==", artis)); 
-//     onSnapshot(q, (snapshot) => {
-//       setConcert(snapshot.docs.map((doc) => doc.data()))
-//       setWaiting1(false)
-//     })
-//   }, []);
+//   // useEffect(() => {
+//   //   const q = query(collection(db, "concerts2"), where("artis", "==", artis)); 
+//   //   onSnapshot(q, (snapshot) => {
+//   //     setConcert(snapshot.docs.map((doc) => doc.data()))
+//   //     setWaiting1(false)
+//   //   })
+//   // }, []);
 
 //   useEffect(() => {
-//     const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal, "and", "kategori", "==", kategori));
+//     const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal));
 //     onSnapshot(r, (snapshot) => {
 //       setCategory(snapshot.docs.map((doc) => doc.data()))
 //       setWaiting2(false)
 //     })
 //   }, []);
+
+//   // console.log(concert)
+//   console.log(category)
   
 //   return (
 //     <SafeAreaProvider>
-//       <Appbar.Header>
+//       <Appbar.Header style={{backgroundColor: "#74E1B2"}}>
 //       <Appbar.BackAction onPress={() => navigation.navigate('HomeConcert')}/>
 //       <Appbar.Content title="Detail Konser" titleStyle={{fontSize: 18, fontWeight: "bold"}} />
 //       </Appbar.Header>
+
+//       {(isWaiting2) &&
+//       <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+//         <ActivityIndicator size={win.width/5} color={"#FB648C"} />
+//       </View> }
+
+//       {!isWaiting2 &&
 //       <ScrollView>
 //         <View style = {styles.container}>
 //           <Image
 //           style = {styles.image} 
 //           source = 
-//           {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/BCF5EFA7-D26C-4A4B-9B2A-9AA5A7741535_1_201_a.jpeg?alt=media&token=31486ce7-c330-43f4-8ee7-afd21e45e3d5'
-//           }}/>
-//           <Text style = {styles.title}>{"\n"}[TREASURE] 2023 TREASURE TOUR HELLO IN JAKARTA</Text>
+//           {{uri: cover}}/>
+//           <Text style = {styles.title}>{"\n"}[{artis}] {namakonser}</Text>
 //           <View style = {styles.container2}>
 //             <Text style = {styles.subtitle}>{"\n"}Informasi Konser</Text>
 //             <View style={{flexDirection: 'row', marginRight: 5,}}>
 //               <Text>{'\u2022'} </Text>
-//               <Text style={styles.body}>Saksikan konser TREASURE berjudul 2023 TREASURE TOUR HELLO IN JAKARTA.</Text>
+//               <Text style={styles.body}>Saksikan konser {artis} berjudul {namakonser}</Text>
 //             </View>
 //             <View style={{flexDirection: 'row', marginRight: 5,}}>
 //               <Text>{'\u2022'} </Text>
-//               <Text style={styles.body}>Konser akan dilaksanakan pada Indonesia Convention Exhibition (ICE) BSD City (Kab. Tangerang) Hall 5-6 pada 18 Maret 2023.</Text>
+//               <Text style={styles.body}>Konser akan dilaksanakan pada {alamat} ({kota}) {tempat} pada {tanggal}.</Text>
 //             </View>
 //           </View>
 //           <View style = {styles.container2}>
@@ -83,7 +114,7 @@
 //             <Text style = {styles.subtitle}>{"\n"}Informasi Tiket{"\n"}</Text>
 //             <Image
 //               style = {styles.image} 
-//               source = {{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/treasure-seatplan.jpeg?alt=media&token=0e9fea52-df5a-4564-8d54-e830277a36f2'}}
+//               source = {{uri: seatplan}}
 //             />
 //             <Text style={{fontSize: 5}}>{"\n"}</Text>
 //             <View style = {styles.box}>
@@ -91,59 +122,56 @@
 //               <Text style = {styles.subtitlebox}>
 //                 Pengembalian tidak tersedia, konfirmasi instan
 //               </Text>
-//               <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
+//               <NumericFormat renderText={text => <Text style={styles.pricebox}>{text}</Text>} value={harga} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
 //               <View style = {styles.fixToText}>
-//                 {/* <TouchableOpacity style={styles.buttonactive}
-//                   onPress={() => {navigation.navigate("ConcertVenue")}}>
-//                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Venue</Text>
-//                 </TouchableOpacity> */}
 //                 <TouchableOpacity style={styles.buttonactive}
-//                   onPress={() => navigation.navigate("TicketDetails")}>
+//                   onPress={() => navigation.navigate("TicketDetails", 
+//                   {kategori: category[0].kategori,
+//                   tanggal : tanggal,
+//                   artis: artis,
+//                   namakonser : namakonser,
+//                   })}>
 //                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
 //                 </TouchableOpacity>
 //               </View>
 //             </View>
 //             <Text style={{fontSize: 5}}>{"\n"}</Text>
-//             <View style = {styles.box}>
+//             {/* <View style = {styles.box}>
 //               <Text style = {styles.titlebox}>{"\n"}PURPLE B</Text>
 //               <Text style = {styles.subtitlebox}>
 //                 Pengembalian tidak tersedia, konfirmasi instan
 //               </Text>
 //               <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
 //               <View style = {styles.fixToText}>
-//                 {/* <TouchableOpacity style={styles.buttonactive}
-//                   onPress={() => {navigation.navigate("ConcertVenue")}}>
-//                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Venue</Text>
-//                 </TouchableOpacity> */}
 //                 <TouchableOpacity style={styles.buttonactive}
 //                   onPress={() => navigation.navigate("TicketDetails")}>
 //                   <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
 //                 </TouchableOpacity>
 //               </View>
-//             </View>
+//             </View> */}
 //           </View>
 //           <View style = {styles.container2}>
 //             <Text style = {styles.subtitle}>{"\n"}Informasi Lokasi{"\n"}</Text>
 //             <View style = {styles.boxloc}>
 //               <Text style = {styles.body}>
-//                 Indonesia Convention Exhibition (ICE) Jalan BSD Grand Boulevard, Pagedangan, Tangerang, Banten
+//                 {alamat}
 //               </Text>
 //               <Text style = {{marginTop : 3, marginBottom : 7, fontWeight : 600}}>
 //                 Untuk melihat venue lebih jelas, silahkan klik gambar di bawah!
 //               </Text>
 //               <TouchableOpacity
-//                 onPress={() => {navigation.navigate("ConcertVenue")}}>
+//                 onPress={() => {navigation.navigate("ConcertVenue", {venuevr: venuevr})}}>
 //               <Image
-//                style = {{
+//               style = {{
 //                 height: 200, 
 //                 borderRadius: 15, 
 //                 overflow: "hidden",}}
-//                source={{uri: 'https://firebasestorage.googleapis.com/v0/b/hiverse-develop.appspot.com/o/ice-bsd-concert.jpeg?alt=media&token=84e111bf-edc5-4aab-a6f1-5b50456d6887'}} />
+//               source={{uri: venue}} />
 //               </TouchableOpacity>
 //             </View>
-//           </View>
+//           </View> 
 //         </View>
-//       </ScrollView>
+//       </ScrollView> }
 //     </SafeAreaProvider>
 //   )
 // }
@@ -187,7 +215,7 @@
 //   },
 //   box: {
 //     width: win.width-20, 
-//     height: 180, 
+//     height: 160, 
 //     borderRadius: 15, 
 //     backgroundColor: "#D9D9D9", 
 //     paddingHorizontal: 20,

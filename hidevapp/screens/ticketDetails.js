@@ -23,26 +23,17 @@ export default function TicketDetails() {
   // Variables used dinamically using firestore
   const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
   const [isWaiting2, setWaiting2] = useState(true); // To wait while database loads
-  const [price, setPrice] = useState(2215000); 
+  // const [price, setPrice] = useState(2215000);  // Not used
   const [concert, setConcert] = useState({});
   const [category, setCategory] = useState({});
 
-//   // Soon to be deleted variables, replaced by passed parameter
-  // const [tanggal, setTanggal] = useState("18 Maret 2023");
-  // const [artis, setArtis] = useState("TREASURE");
-  // const [namakonser, setNamaKonser] = useState("2023 TREASURE TOUR HELLO IN JAKARTA");
-  // const [kategori, setKategori] = useState("PURPLE A");
-
-  
   // Storing passed parameter from previous screen
   const [tanggal, setTanggal] = useState(route.params?.tanggal);
   const [artis, setArtis] = useState(route.params?.artis);
   const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
   const [kategori, setKategori] = useState(route.params?.kategori);
-  // const tanggal = route.params.tanggal;
-  // const artis = route.params.artis;
-  // const namakonser = route.params.namakonser;
-  // const kategori = route.params.kategori;
+  const [price, setPrice] = useState(route.params?.price); 
+  
 
   // Using firestore to search for corresponding doc
   useEffect(() => {
