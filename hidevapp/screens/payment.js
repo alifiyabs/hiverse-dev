@@ -24,8 +24,6 @@ export default function Payment() {
   const [kuota, setKuota] = useState(route.params?.kuota);
   const [namaPembeli, setNamaPembeli] = useState(route.params?.namaPembeli);
   const [noPembeli, setNoPembeli] = useState(route.params?.noPembeli);
-  // const [nikPembeli, setNIKPembeli] = useState(route.params?.nikPembeli);  // is unused
-  // const [alamatPembeli, setAlamatPembeli] = useState(route.params?.alamatPembeli);  // is unused
   
   // Variables used by default
   const [value, setValue] = useState("gopay"); // By default Gopay is chosen method

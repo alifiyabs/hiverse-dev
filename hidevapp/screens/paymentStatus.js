@@ -3,7 +3,6 @@ import { Dimensions, StyleSheet, View, Image, ActivityIndicator } from "react-na
 import { Appbar, Text } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
-// import { LinearGradient } from "expo-linear-gradient";
 import { doc, updateDoc } from "firebase/firestore"; 
 import { db } from "../firestore/config";
 
@@ -18,12 +17,11 @@ export default function PaymentStatus() {
   // Storing passed parameter from previous screen
   const [kuota, setKuota] = useState(route.params?.kuota);
   const [ticket, setTicket] = useState(route.params?.ticket);
-  // const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
   const [artis, setArtis] = useState(route.params?.artis);
   const [tanggal, setTanggal] = useState(route.params?.tanggal);
   const [kategori, setKategori] = useState(route.params?.kategori);
 
-  // Declare fixed variable
+  // Declare fixed variable for Document ID in database collection "category2"
   const docID = artis + "-" + tanggal + "-" + kategori
 
   // Using firestore to update
@@ -56,7 +54,7 @@ export default function PaymentStatus() {
 
       {!isWaiting &&
       // <Appbar.Action icon="close" onPress={() => navigation.navigate("HomeConcert")} />}
-      <Appbar.Action icon="close" onPress={() => navigation.navigate("DetailConcert", 
+      <Appbar.Action icon="close" onPress={() => navigation.navigate("TicketDetails", 
                                   {artis: artis,
                                   tanggal: tanggal,
                                   kategori: kategori})} />}
@@ -81,4 +79,4 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
       textAlign: "center",
     },
-  })
+})

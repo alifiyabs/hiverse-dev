@@ -32,6 +32,9 @@ export default function TicketDetails() {
   const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
   const [kategori, setKategori] = useState(route.params?.kategori); 
   const [price, setPrice] = useState(route.params?.price); 
+
+  // Mengubah string menjadi Integer
+  const harga = parseInt(price);
   
 
   // Using firestore to search for corresponding doc
@@ -155,11 +158,11 @@ export default function TicketDetails() {
 
         <View style={styles.smallcontainer2}>
           <Text style={styles.total}>
-            {"\n"}<NumericFormat renderText={text => <Text style={styles.total}>{text}</Text>} value={price+servicecharge} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
+            {"\n"}<NumericFormat renderText={text => <Text style={styles.total}>{text}</Text>} value={harga+servicecharge} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp"} />
           </Text>
           <TouchableOpacity style={styles.button}
             onPress={() => navigation.navigate("TicketPurchase", 
-            {total: price+servicecharge, 
+            {total: harga+servicecharge, 
               ticket: ticket,
               artis: concert[0].artis,
               tanggal: concert[0].tanggal, 
