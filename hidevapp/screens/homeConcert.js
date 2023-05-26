@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, TouchableOpacity, View, FlatList} from 'react-native';
-import { Card, Searchbar, Appbar, Text } from 'react-native-paper';
+import { Card, Searchbar, Appbar, Text, ActivityIndicator } from 'react-native-paper';
 import { NumericFormat } from "react-number-format";
 import { useNavigation} from '@react-navigation/native';
 import { SafeAreaProvider} from 'react-native-safe-area-context';
@@ -12,13 +12,14 @@ export default function HomeConcert() {
   const navigation = useNavigation();
   
 // Database Firestore Const
-//const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
+  const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
   const [concert, setConcert] = useState({});
 
   useEffect(() => {
     const dataref = query(collection(db, "concerts2"));
     onSnapshot(dataref, (snapshot) => {
       setConcert(snapshot.docs.map((doc) => doc.data()))
+      setWaiting1(false);
     })
   }, []);
 
@@ -35,7 +36,13 @@ export default function HomeConcert() {
           placeholder="Cari Artis, Konser.."
         />
       </View>
-      {/* {console.log(concert)} */}
+
+      {(isWaiting1) &&
+      <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+        <ActivityIndicator size={win.width/5} color={"#FB648C"} />
+      </View> }
+
+      {!isWaiting1 && 
       <FlatList
             data={concert}
             numColumns={1}
@@ -64,7 +71,7 @@ export default function HomeConcert() {
                     </TouchableOpacity></>
                 </View> 
             )}
-        />
+        />}
     </SafeAreaProvider>
   )
 }

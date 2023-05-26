@@ -3,7 +3,6 @@ import { Dimensions, StyleSheet, View, TouchableOpacity, ScrollView } from "reac
 import { Appbar, TextInput, Text } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
-// import { LinearGradient } from "expo-linear-gradient";
 
 // Get window size for ease
 const win = Dimensions.get("window");

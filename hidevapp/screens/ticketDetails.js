@@ -35,7 +35,6 @@ export default function TicketDetails() {
 
   // Mengubah string menjadi Integer
   const harga = parseInt(price);
-  
 
   // Using firestore to search for corresponding doc
   useEffect(() => {

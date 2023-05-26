@@ -4,7 +4,6 @@ import { Appbar, Text, RadioButton } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NumericFormat } from "react-number-format";
-// import { LinearGradient } from "expo-linear-gradient";
 
 // Get window size for ease
 const win = Dimensions.get("window");
