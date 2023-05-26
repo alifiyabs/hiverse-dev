@@ -19,7 +19,7 @@ export default function TicketDetails() {
   // Variables used by default
   const [ticket, setTicket] = useState(1);  // By default ticket is 1
   const [servicecharge, setServicecharge] = useState(1500); // Fixed service charge
-  
+
   // Variables used dinamically using firestore
   const [isWaiting1, setWaiting1] = useState(true); // To wait while database loads
   const [isWaiting2, setWaiting2] = useState(true); // To wait while database loads
@@ -30,7 +30,7 @@ export default function TicketDetails() {
   const [tanggal, setTanggal] = useState(route.params?.tanggal);
   const [artis, setArtis] = useState(route.params?.artis);
   const [namakonser, setNamaKonser] = useState(route.params?.namakonser);
-  const [kategori, setKategori] = useState(route.params?.kategori);
+  const [kategori, setKategori] = useState(route.params?.kategori); 
   const [price, setPrice] = useState(route.params?.price); 
   
 
@@ -44,7 +44,7 @@ export default function TicketDetails() {
   }, []);
 
   useEffect(() => {
-    const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal, "and", "kategori", "==", kategori)); // Should be using variable
+    const r = query(collection(db, "category2"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal, "and", "kategori", "==", kategori)); // Should be using variable
     onSnapshot(r, (snapshot) => {
       setCategory(snapshot.docs.map((doc) => doc.data()))
       setWaiting2(false)
@@ -52,7 +52,7 @@ export default function TicketDetails() {
   }, []);
 
 
-  console.log(concert)
+  // console.log(concert)
 
   // Comments on this line onwards are the to be used code
   return (

@@ -45,7 +45,7 @@ export default function DetailConcert() {
   // From Database Category 
 
   useEffect(() => {
-    const r = query(collection(db, "category"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal));
+    const r = query(collection(db, "category2"), where("namakonser", "==", namakonser, "and", "tanggal", "==", tanggal));
     onSnapshot(r, (snapshot) => {
       setCategory(snapshot.docs.map((doc) => doc.data()))
       setWaiting2(false)
@@ -53,7 +53,7 @@ export default function DetailConcert() {
   }, []);
 
   // console.log(concert)
-  console.log(category)
+  // console.log(category)
   
   return (
     <SafeAreaProvider>
@@ -134,20 +134,6 @@ export default function DetailConcert() {
                   </TouchableOpacity>
                 </View>
               </View>
-              <Text style={{fontSize: 5}}>{"\n"}</Text>
-              {/* <View style = {styles.box}>
-                <Text style = {styles.titlebox}>{"\n"}PURPLE B</Text>
-                <Text style = {styles.subtitlebox}>
-                  Pengembalian tidak tersedia, konfirmasi instan
-                </Text>
-                <Text style = {styles.pricebox}>{"\n"}Rp2.215.000</Text>
-                <View style = {styles.fixToText}>
-                  <TouchableOpacity style={styles.buttonactive}
-                    onPress={() => navigation.navigate("TicketDetails")}>
-                    <Text style={{color: "#FFFFFF", fontWeight: "bold"}}>Pilih</Text>
-                  </TouchableOpacity>
-                </View>
-              </View> */}
             </View>
             <View style = {styles.container2}>
               <Text style = {styles.subtitle}>{"\n"}Informasi Lokasi{"\n"}</Text>

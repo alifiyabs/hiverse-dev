@@ -24,11 +24,11 @@ export default function PaymentStatus() {
   const [kategori, setKategori] = useState(route.params?.kategori);
 
   // Declare fixed variable
-  // const docID = artis + "-" + tanggal + "-" + kategori
+  const docID = artis + "-" + tanggal + "-" + kategori
 
   // Using firestore to update
   useEffect(() => {
-    const updateRef = doc(db, "category")
+    const updateRef = doc(db, "category2", docID)
 
     if (kuota-ticket < 1) {
       updateDoc(updateRef, {

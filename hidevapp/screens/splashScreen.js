@@ -11,7 +11,7 @@ export default function SplashScreen() {
         setTimeout( () => {
             navigation.replace("OnBoarding");
         }, 3000)
-    }, [navigation])
+    },[navigation])
     
     return <SafeAreaProvider>
         <View style={styles.container}>
